@@ -13,19 +13,6 @@
 		rel="stylesheet">
 	<script src="https://unpkg.com/lucide@latest"></script>
 	<script src="../auto-image-converter.js"></script>
-	<script>
-		// Wait for Lucide to be fully loaded
-		function waitForLucide() {
-			if (typeof lucide !== 'undefined' && lucide.createIcons) {
-				console.log('Lucide loaded, creating icons...');
-				lucide.createIcons();
-			} else {
-				console.log('Waiting for Lucide...');
-				setTimeout(waitForLucide, 50);
-			}
-		}
-		waitForLucide();
-	</script>
 	<style>
 		body {
 			font-family: 'Be Vietnam Pro', sans-serif;
@@ -94,26 +81,8 @@
 			stroke-linejoin: round !important;
 		}
 
-		/* Specific styling for help-circle icon to ensure 32px size */
-		[data-lucide="help-circle"] {
-			width: 32px !important;
-			height: 32px !important;
-			display: inline-block !important;
-			font-size: 32px !important;
-		}
-
-		[data-lucide="help-circle"] svg {
-			width: 32px !important;
-			height: 32px !important;
-			stroke: currentColor !important;
-			fill: none !important;
-			stroke-width: 2 !important;
-			stroke-linecap: round !important;
-			stroke-linejoin: round !important;
-		}
-
 		.header-bg {
-			background-image: url('/imgs/cv_header.png');
+			background-image: url('../imgs/cv_header.png');
 			background-size: cover;
 			background-position: center;
 			position: relative;
@@ -792,121 +761,7 @@
 	</div>
 
 	<script>
-		// Icon sizing fix function
-		function fixIconSizes() {
-			// Fix all Lucide icons
-			document.querySelectorAll('[data-lucide]').forEach(function (element) {
-				const svg = element.querySelector('svg');
-				if (svg) {
-					// Get the icon type
-					const iconType = element.getAttribute('data-lucide');
-
-					// Set specific size for help-circle
-					if (iconType === 'help-circle') {
-						svg.setAttribute('width', '32');
-						svg.setAttribute('height', '32');
-						element.style.width = '32px';
-						element.style.height = '32px';
-						element.style.fontSize = '32px';
-					} else {
-						// Standard size for other icons
-						svg.setAttribute('width', '48');
-						svg.setAttribute('height', '48');
-						element.style.width = '48px';
-						element.style.height = '48px';
-					}
-				}
-			});
-		}
-
-		// Multiple fallbacks to ensure Lucide icons are created
-		function createLucideIcons() {
-			if (typeof lucide !== 'undefined' && lucide.createIcons) {
-				try {
-					lucide.createIcons();
-					console.log('Lucide icons created successfully');
-
-					// Apply size fixes after creation
-					setTimeout(fixIconSizes, 100);
-				} catch (error) {
-					console.error('Error creating Lucide icons:', error);
-				}
-			} else {
-				console.warn('Lucide not available, retrying...');
-				setTimeout(createLucideIcons, 100);
-			}
-		}
-
-		// Immediate execution
-		createLucideIcons();
-
-		// DOM ready fallback
-		document.addEventListener('DOMContentLoaded', function () {
-			createLucideIcons();
-			fixIconSizes();
-		});
-
-		// Window load fallback
-		window.addEventListener('load', function () {
-			createLucideIcons();
-			fixIconSizes();
-		});
-
-		// Additional fallback with delay
-		setTimeout(function () {
-			createLucideIcons();
-			fixIconSizes();
-		}, 500);
-
-		// Final fallback for export tools
-		setTimeout(function () {
-			console.log('Final fallback executing...');
-			createLucideIcons();
-
-			// Force re-render if needed
-			if (document.querySelector('[data-lucide]')) {
-				document.querySelectorAll('[data-lucide]').forEach(function (el) {
-					console.log('Checking icon:', el.getAttribute('data-lucide'));
-					if (!el.querySelector('svg')) {
-						console.log('Missing SVG for:', el.getAttribute('data-lucide'));
-
-						// Try to manually create this specific icon
-						const iconName = el.getAttribute('data-lucide');
-						if (lucide && lucide.icons && lucide.icons[iconName]) {
-							console.log('Manually creating icon:', iconName);
-							const icon = lucide.icons[iconName];
-							el.innerHTML = icon.toSvg();
-						} else {
-							console.log('Icon not found in lucide.icons:', iconName);
-						}
-					} else {
-						console.log('SVG found for:', el.getAttribute('data-lucide'));
-					}
-				});
-			}
-
-			// Debug: Check if help-circle icon is rendered
-			const helpCircle = document.querySelector('[data-lucide="help-circle"]');
-			if (helpCircle) {
-				console.log('Help circle element found:', helpCircle);
-				console.log('Has SVG:', helpCircle.querySelector('svg') !== null);
-
-				// If still no SVG, create it manually
-				if (!helpCircle.querySelector('svg')) {
-					console.log('Creating manual SVG for help-circle');
-					helpCircle.innerHTML = `
-						<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-							<circle cx="12" cy="12" r="10"></circle>
-							<path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
-							<line x1="12" y1="17" x2="12.01" y2="17"></line>
-						</svg>
-					`;
-				}
-			}
-
-			// Apply icon size fixes after all icon operations
-			fixIconSizes();
-		}, 1500);
+		lucide.createIcons();
 	</script>
 
 
