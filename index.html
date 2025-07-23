@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Khoa Công nghệ Thông tin - Trường ĐH KHTN | Infographics</title>
 	<script src="https://cdn.tailwindcss.com"></script>
+	<script src="auto-image-converter.js"></script>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link
@@ -462,7 +463,7 @@
 
 		// --- Chức năng xuất PNG ---
 
-		// Hàm chung để chụp ảnh màn hình một trang
+		// Hàm chung để chụp ảnh màn hình một trang - đơn giản và ổn định
 		async function capturePageAsCanvas(url, config) {
 			return new Promise((resolve, reject) => {
 				const tempFrame = document.createElement('iframe');
@@ -472,7 +473,8 @@
 					left: '-9999px',
 					width: '1096px', // Chiều rộng cố định để đảm bảo layout nhất quán
 					height: '1200px', // Chiều cao đủ lớn
-					border: 'none'
+					border: 'none',
+					zoom: '1' // Đảm bảo zoom chuẩn
 				});
 				tempFrame.src = url;
 				document.body.appendChild(tempFrame);
@@ -483,24 +485,49 @@
 						const content = iframeDoc.getElementById('infographic-content');
 						if (!content) return reject(new Error('Không tìm thấy nội dung để xuất file'));
 
-						// Thêm class đặc biệt để tối ưu CSS cho việc xuất file
+						// Thêm class export-mode để áp dụng CSS tối ưu
 						iframeDoc.body.classList.add('export-mode');
 
-						// Đợi một chút để layout ổn định
+						// Trigger image conversion if available
+						if (iframeDoc.defaultView.enableExportMode) {
+							iframeDoc.defaultView.enableExportMode();
+						}
+
+						// Force icon rendering
+						if (iframeDoc.defaultView.lucide && iframeDoc.defaultView.lucide.createIcons) {
+							iframeDoc.defaultView.lucide.createIcons();
+						}
+
+						// Wait for layout to stabilize and images to convert
 						setTimeout(() => {
 							html2canvas(content, {
 								backgroundColor: config.background,
 								useCORS: true,
-								scale: 3, // Tăng scale để ảnh nét hơn (gấp 3 lần độ phân giải)
+								allowTaint: false,
+								scale: 2, // Giảm scale để tránh vấn đề memory
 								scrollX: 0,
 								scrollY: 0,
-								width: 1096, // Đảm bảo chiều rộng canvas đúng với layout
+								width: 1096,
+								height: content.scrollHeight,
 								windowWidth: 1096,
+								windowHeight: content.scrollHeight,
+								x: 0,
+								y: 0,
+								ignoreElements: (element) => {
+									// Ignore script tags and some problematic elements
+									return element.tagName === 'SCRIPT' ||
+										element.style.position === 'fixed' ||
+										element.classList.contains('download-buttons');
+								}
 							}).then(canvas => {
 								document.body.removeChild(tempFrame);
 								resolve(canvas);
-							}).catch(reject);
-						}, 500);
+							}).catch(error => {
+								console.error('html2canvas error:', error);
+								document.body.removeChild(tempFrame);
+								reject(error);
+							});
+						}, 800); // Reduced wait time
 
 					} catch (err) {
 						document.body.removeChild(tempFrame);
@@ -513,9 +540,7 @@
 					reject(new Error('Không thể tải trang'));
 				};
 			});
-		}
-
-		// Xử lý nút "Tải trang hiện tại"
+		}		// Xử lý nút "Tải trang hiện tại"
 		document.getElementById('download-current').addEventListener('click', async () => {
 			const config = pageConfigs[currentPageUrl];
 			if (!config) return alert('Không thể tải trang này');

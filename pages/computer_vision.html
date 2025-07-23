@@ -12,6 +12,7 @@
 		href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;900&family=Poppins:wght@700;900&display=swap"
 		rel="stylesheet">
 	<script src="https://unpkg.com/lucide@latest"></script>
+	<script src="../auto-image-converter.js"></script>
 	<script>
 		// Wait for Lucide to be fully loaded
 		function waitForLucide() {
@@ -86,6 +87,24 @@
 		[data-lucide] svg {
 			width: 100% !important;
 			height: 100% !important;
+			stroke: currentColor !important;
+			fill: none !important;
+			stroke-width: 2 !important;
+			stroke-linecap: round !important;
+			stroke-linejoin: round !important;
+		}
+
+		/* Specific styling for help-circle icon to ensure 32px size */
+		[data-lucide="help-circle"] {
+			width: 32px !important;
+			height: 32px !important;
+			display: inline-block !important;
+			font-size: 32px !important;
+		}
+
+		[data-lucide="help-circle"] svg {
+			width: 32px !important;
+			height: 32px !important;
 			stroke: currentColor !important;
 			fill: none !important;
 			stroke-width: 2 !important;
@@ -773,12 +792,42 @@
 	</div>
 
 	<script>
+		// Icon sizing fix function
+		function fixIconSizes() {
+			// Fix all Lucide icons
+			document.querySelectorAll('[data-lucide]').forEach(function (element) {
+				const svg = element.querySelector('svg');
+				if (svg) {
+					// Get the icon type
+					const iconType = element.getAttribute('data-lucide');
+
+					// Set specific size for help-circle
+					if (iconType === 'help-circle') {
+						svg.setAttribute('width', '32');
+						svg.setAttribute('height', '32');
+						element.style.width = '32px';
+						element.style.height = '32px';
+						element.style.fontSize = '32px';
+					} else {
+						// Standard size for other icons
+						svg.setAttribute('width', '48');
+						svg.setAttribute('height', '48');
+						element.style.width = '48px';
+						element.style.height = '48px';
+					}
+				}
+			});
+		}
+
 		// Multiple fallbacks to ensure Lucide icons are created
 		function createLucideIcons() {
 			if (typeof lucide !== 'undefined' && lucide.createIcons) {
 				try {
 					lucide.createIcons();
 					console.log('Lucide icons created successfully');
+
+					// Apply size fixes after creation
+					setTimeout(fixIconSizes, 100);
 				} catch (error) {
 					console.error('Error creating Lucide icons:', error);
 				}
@@ -792,13 +841,22 @@
 		createLucideIcons();
 
 		// DOM ready fallback
-		document.addEventListener('DOMContentLoaded', createLucideIcons);
+		document.addEventListener('DOMContentLoaded', function () {
+			createLucideIcons();
+			fixIconSizes();
+		});
 
 		// Window load fallback
-		window.addEventListener('load', createLucideIcons);
+		window.addEventListener('load', function () {
+			createLucideIcons();
+			fixIconSizes();
+		});
 
 		// Additional fallback with delay
-		setTimeout(createLucideIcons, 500);
+		setTimeout(function () {
+			createLucideIcons();
+			fixIconSizes();
+		}, 500);
 
 		// Final fallback for export tools
 		setTimeout(function () {
@@ -837,7 +895,7 @@
 				if (!helpCircle.querySelector('svg')) {
 					console.log('Creating manual SVG for help-circle');
 					helpCircle.innerHTML = `
-						<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 							<circle cx="12" cy="12" r="10"></circle>
 							<path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
 							<line x1="12" y1="17" x2="12.01" y2="17"></line>
@@ -845,7 +903,139 @@
 					`;
 				}
 			}
+
+			// Apply icon size fixes after all icon operations
+			fixIconSizes();
 		}, 1500);
+	</script>
+
+
+	<script>
+		// Dynamic Image Converter for Export
+		class ExportImageConverter {
+			constructor() {
+				this.imageCache = new Map();
+				this.isExportMode = false;
+			}
+
+			async convertImageToBase64(imgElement) {
+				const src = imgElement.getAttribute('data-original-src') || imgElement.src;
+
+				// Skip if already converted or external URL
+				if (src.startsWith('data:') || src.startsWith('http')) {
+					return;
+				}
+
+				// Check cache first
+				if (this.imageCache.has(src)) {
+					imgElement.src = this.imageCache.get(src);
+					return;
+				}
+
+				try {
+					// Save original src
+					if (!imgElement.getAttribute('data-original-src')) {
+						imgElement.setAttribute('data-original-src', src);
+					}
+
+					// Convert to absolute URL for fetch
+					const response = await fetch(src);
+					if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+					const blob = await response.blob();
+					const reader = new FileReader();
+
+					reader.onload = () => {
+						const base64Data = reader.result;
+						this.imageCache.set(src, base64Data);
+						imgElement.src = base64Data;
+						console.log(`✅ Converted image: ${src}`);
+					};
+
+					reader.readAsDataURL(blob);
+				} catch (error) {
+					console.warn(`⚠️ Failed to convert image: ${src}`, error);
+				}
+			}
+
+			async enableExportMode() {
+				if (this.isExportMode) return;
+
+				this.isExportMode = true;
+				document.body.classList.add('export-mode');
+
+				console.log('🔄 Converting images for export...');
+
+				const images = document.querySelectorAll('img');
+				const conversions = Array.from(images).map(img => this.convertImageToBase64(img));
+
+				await Promise.all(conversions);
+				console.log('✅ All images converted for export');
+
+				// Trigger icon re-creation
+				if (typeof lucide !== 'undefined' && lucide.createIcons) {
+					lucide.createIcons();
+				}
+			}
+
+			disableExportMode() {
+				if (!this.isExportMode) return;
+
+				this.isExportMode = false;
+				document.body.classList.remove('export-mode');
+
+				// Restore original images
+				const images = document.querySelectorAll('img[data-original-src]');
+				images.forEach(img => {
+					img.src = img.getAttribute('data-original-src');
+				});
+
+				console.log('✅ Export mode disabled, images restored');
+			}
+		}
+
+		// Global instance
+		window.exportConverter = new ExportImageConverter();
+
+		// Auto-enable export mode detection
+		function detectExportMode() {
+			// Check for common export tool indicators
+			const indicators = [
+				() => window.location.search.includes('export'),
+				() => window.location.hash.includes('export'),
+				() => document.body.classList.contains('export-mode'),
+				() => window.navigator.webdriver, // Selenium
+				() => window.puppeteer, // Puppeteer
+				() => window.phantom, // PhantomJS
+				() => window.__nightmare, // Nightmare
+				() => window.callPhantom, // PhantomJS
+				() => document.documentElement.getAttribute('data-export') === 'true'
+			];
+
+			return indicators.some(check => {
+				try { return check(); } catch (e) { return false; }
+			});
+		}
+
+		// Export control functions
+		window.enableExportMode = () => window.exportConverter.enableExportMode();
+		window.disableExportMode = () => window.exportConverter.disableExportMode();
+
+		// Auto-detection on load
+		document.addEventListener('DOMContentLoaded', () => {
+			if (detectExportMode()) {
+				console.log('🎯 Export mode detected, enabling...');
+				window.exportConverter.enableExportMode();
+			}
+		});
+
+		// Manual trigger via console or URL parameter
+		const urlParams = new URLSearchParams(window.location.search);
+		if (urlParams.get('mode') === 'export') {
+			window.addEventListener('load', () => {
+				window.exportConverter.enableExportMode();
+			});
+		}
 	</script>
 </body>
 
