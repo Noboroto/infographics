@@ -135,6 +135,14 @@
 			}
 		}
 
+		/* Adjust download buttons for mobile header */
+		@media (max-width: 768px) {
+			.download-buttons {
+				top: 130px !important;
+				right: 10px !important;
+			}
+		}
+
 		.icon-color-ai {
 			color: #4f46e5;
 		}
@@ -169,6 +177,91 @@
 
 		.icon-color-faculty {
 			color: #7c3aed;
+		}
+
+		/* Mobile combo box styles */
+		.mobile-select-container {
+			display: none;
+		}
+
+		/* Mobile top header */
+		.mobile-top-header {
+			display: none;
+			position: fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+			z-index: 1000;
+			background: rgba(255, 255, 255, 0.95);
+			backdrop-filter: blur(10px);
+			border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+			box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+		}
+
+		.mobile-header-content {
+			padding: 1rem;
+			max-width: 100%;
+		}
+
+		.mobile-header-title {
+			font-size: 1.125rem;
+			font-weight: 700;
+			color: #1E293B;
+			text-align: center;
+			margin-bottom: 0.75rem;
+		}
+
+		/* Fix border radius for desktop title */
+		.main-container {
+			background-color: rgba(255, 255, 255, 0.95);
+			backdrop-filter: blur(10px);
+			border-radius: 1rem !important;
+			/* Fix: ensure all 4 corners are rounded */
+			box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 10px 10px -5px rgb(0 0 0 / 0.04);
+		}
+
+		/* Specific fix for iPhone SE and small mobile devices */
+		@media (max-width: 480px) {
+			.mobile-select-container {
+				display: block !important;
+				visibility: visible !important;
+				opacity: 1 !important;
+				z-index: 10 !important;
+			}
+		}
+
+		.mobile-select {
+			background: rgba(255, 255, 255, 0.95);
+			backdrop-filter: blur(10px);
+			border: 2px solid #e2e8f0;
+			border-radius: 0.75rem;
+			padding: 1rem;
+			font-size: 1rem;
+			color: #1E293B;
+			width: 100%;
+			box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+			transition: all 0.3s ease;
+			cursor: pointer;
+			background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+			background-position: right 1rem center;
+			background-repeat: no-repeat;
+			background-size: 1.5em 1.5em;
+			padding-right: 3rem;
+			appearance: none;
+			-webkit-appearance: none;
+			-moz-appearance: none;
+			min-height: 44px;
+		}
+
+		.mobile-select:focus {
+			outline: none;
+			border-color: #3b82f6;
+			box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+		}
+
+		.mobile-select:hover {
+			border-color: #3b82f6;
+			transform: translateY(-1px);
 		}
 
 		/* Export Mode CSS - Center align page content */
@@ -302,6 +395,37 @@
 			}
 		}
 
+		/* Tablet layout improvements */
+		@media (max-width: 768px) {
+			.mobile-top-header {
+				display: block !important;
+			}
+
+			.mobile-select-container {
+				display: block !important;
+			}
+
+			body {
+				padding-top: 120px !important;
+				/* Space for fixed header */
+			}
+
+			body:not(.export-mode) .container .grid {
+				grid-template-columns: 1fr !important;
+				gap: 1rem !important;
+			}
+
+			body:not(.export-mode) .container .grid>div:first-child {
+				order: 1 !important;
+				display: none !important;
+				/* Hide desktop sidebar area */
+			}
+
+			body:not(.export-mode) .content-container {
+				order: 1 !important;
+			}
+		}
+
 		@media (max-width: 640px) {
 			body:not(.export-mode) .menu-grid {
 				grid-template-columns: 1fr !important;
@@ -331,8 +455,86 @@
 				font-size: 0.875rem !important;
 			}
 
+			/* Show text labels on mobile - remove the display: none rule */
 			body:not(.export-mode) .download-btn span {
+				display: inline !important;
+			}
+
+			/* Mobile top header layout */
+			.mobile-top-header {
+				display: block !important;
+			}
+
+			.mobile-select-container {
+				display: block !important;
+			}
+
+			body {
+				padding-top: 120px !important;
+			}
+
+			body:not(.export-mode) .container .grid {
+				grid-template-columns: 1fr !important;
+			}
+
+			body:not(.export-mode) .container .grid>div:first-child {
 				display: none !important;
+			}
+
+			body:not(.export-mode) .content-container {
+				order: 1 !important;
+			}
+		}
+
+		/* iPhone SE and small mobile devices specific fixes */
+		@media (max-width: 480px) {
+			.mobile-top-header {
+				display: block !important;
+			}
+
+			.mobile-header-content {
+				padding: 0.75rem !important;
+			}
+
+			.mobile-header-title {
+				font-size: 1rem !important;
+				margin-bottom: 0.5rem !important;
+			}
+
+			.mobile-select-container {
+				display: block !important;
+				visibility: visible !important;
+				opacity: 1 !important;
+				z-index: 10 !important;
+			}
+
+			.mobile-select {
+				padding: 0.75rem !important;
+				font-size: 0.9rem !important;
+				min-height: 44px !important;
+				-webkit-appearance: none !important;
+				appearance: none !important;
+			}
+
+			body {
+				padding-top: 100px !important;
+			}
+
+			body:not(.export-mode) .container {
+				padding: 0.5rem !important;
+			}
+
+			body:not(.export-mode) .container .grid {
+				grid-template-columns: 1fr !important;
+				gap: 0.75rem !important;
+			}
+
+			body:not(.export-mode) .container .grid>div:first-child {
+				display: none !important;
+			}
+
+			body:not(.export-mode) .content-container {
+				order: 1 !important;
 			}
 		}
 	</style>
@@ -363,14 +565,38 @@
 		</div>
 	</div>
 
+	<!-- Mobile top header with combo box -->
+	<div class="mobile-top-header">
+		<div class="mobile-header-content">
+			<h2 class="mobile-header-title">
+				<i data-lucide="navigation" class="inline w-5 h-5 mr-2"></i>
+				<span>Danh sách chuyên ngành</span>
+			</h2>
+			<div class="mobile-select-container">
+				<select id="mobile-specialty-select" class="mobile-select">
+					<option value="faculty.html">Thông tin chung - Khoa CNTT</option>
+					<option value="pages/computer_science.html" selected>Khoa học Máy tính - KHMT</option>
+					<option value="pages/artificial_intelligence.html">Trí tuệ Nhân tạo - TTNT</option>
+					<option value="pages/computer_vision.html">Thị Giác Máy Tính & Điều Khiển Học Thông Minh</option>
+					<option value="pages/knowledge_engineer.html">Công nghệ Tri thức - CNTThuc</option>
+					<option value="pages/data_science.html">Khoa học Dữ liệu - KHDL</option>
+					<option value="pages/software_engineer.html">Kỹ thuật Phần mềm - KTPM</option>
+					<option value="pages/computer_network.html">Mạng máy tính & Viễn thông - MMT</option>
+					<option value="pages/information_system.html">Hệ thống Thông tin - HTTT</option>
+				</select>
+			</div>
+		</div>
+	</div>
+
 	<div class="container mx-auto p-2 md:p-4 lg:p-8">
 		<div class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-1 gap-4 md:gap-8">
 			<div class="lg:col-span-1 md:col-span-1">
+				<h2 class="text-xl md:text-2xl font-bold text-gray-800 mb-4 md:mb-6 text-center">
+					<i data-lucide="navigation" class="inline w-5 h-5 md:w-6 md:h-6 mr-2"></i>
+					<span>Danh sách chuyên ngành</span>
+				</h2>
+
 				<div id="sidebar-container" class="main-container sidebar-container p-4 md:p-6 lg:sticky lg:top-4">
-					<h2 class="text-xl md:text-2xl font-bold text-gray-800 mb-4 md:mb-6 text-center">
-						<i data-lucide="navigation" class="inline w-5 h-5 md:w-6 md:h-6 mr-2"></i>
-						<span>Danh sách chuyên ngành</span>
-					</h2>
 					<div class="space-y-3">
 						<div class="menu-item p-4 text-center" onclick="loadContent('faculty.html', this)">
 							<i data-lucide="graduation-cap" class="w-8 h-8 mx-auto mb-2 icon-color-faculty"></i>
@@ -442,6 +668,17 @@
 
 		let currentPageUrl = 'pages/computer_science.html';
 
+		// Debug information for mobile troubleshooting (can be removed in production)
+		if (window.innerWidth <= 480) {
+			console.log('🔍 iPhone SE Debug - Screen width:', window.innerWidth);
+			setTimeout(() => {
+				const mobileContainer = document.querySelector('.mobile-select-container');
+				const containerStyle = window.getComputedStyle(mobileContainer);
+				console.log('📱 Mobile container display:', containerStyle.display);
+				console.log('📱 Mobile container visibility:', containerStyle.visibility);
+			}, 500);
+		}
+
 		const pageConfigs = {
 			'faculty.html': { background: '#F8FAFC', filename: 'thongtin-chung-fit-hcmus.png' },
 			'pages/artificial_intelligence.html': { background: '#EEF2FF', filename: 'infographic-ai-hcmus.png' },
@@ -458,8 +695,28 @@
 			currentPageUrl = url;
 			document.getElementById('content-frame').src = url;
 			document.querySelectorAll('.menu-item').forEach(item => item.classList.remove('active'));
-			element.classList.add('active');
+			if (element) element.classList.add('active');
+
+			// Update mobile select value
+			const mobileSelect = document.getElementById('mobile-specialty-select');
+			if (mobileSelect) {
+				mobileSelect.value = url;
+			}
 		}
+
+		// Handle mobile select change
+		document.getElementById('mobile-specialty-select').addEventListener('change', function (e) {
+			const selectedUrl = e.target.value;
+			currentPageUrl = selectedUrl;
+			document.getElementById('content-frame').src = selectedUrl;
+
+			// Update desktop sidebar active state
+			document.querySelectorAll('.menu-item').forEach(item => item.classList.remove('active'));
+			const targetMenuItem = document.querySelector(`[onclick*="${selectedUrl}"]`);
+			if (targetMenuItem) {
+				targetMenuItem.classList.add('active');
+			}
+		});
 
 		// --- Chức năng xuất PNG ---
 
