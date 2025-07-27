@@ -83,6 +83,34 @@
 			height: calc(100vh - 3rem);
 			max-height: calc(100vh - 3rem);
 			overflow-y: auto;
+			border-radius: 1rem;
+			/* Custom scrollbar styles to preserve rounded corners */
+			scrollbar-width: thin;
+			scrollbar-color: rgba(156, 163, 175, 0.5) transparent;
+		}
+
+		/* Webkit scrollbar styles for sidebar-container */
+		.sidebar-container::-webkit-scrollbar {
+			width: 6px;
+		}
+
+		.sidebar-container::-webkit-scrollbar-track {
+			background: transparent;
+			border-radius: 0 1rem 1rem 0;
+		}
+
+		.sidebar-container::-webkit-scrollbar-thumb {
+			background: rgba(156, 163, 175, 0.5);
+			border-radius: 3px;
+		}
+
+		.sidebar-container::-webkit-scrollbar-thumb:hover {
+			background: rgba(156, 163, 175, 0.7);
+		}
+
+		/* Ensure menu items don't overlap with scrollbar */
+		#menu-items-wrapper {
+			padding-right: 4px;
 		}
 
 		.header-section {
