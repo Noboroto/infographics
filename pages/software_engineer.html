@@ -3,16 +3,7 @@
 
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=d		.faculty-slogan {
-			font-size: 1.25rem;
-			font-weight: 600;
-			color: #FBBF24;
-			font-style: italic;
-			text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-			margin-top: 1rem;
-		}
-
-		/* Export Mode CSS - Center align page content */dth, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Infographic: Kỹ Thuật Phần Mềm – Từ Ý Tưởng Đến Kiệt Tác Số</title>
 	<script src="https://cdn.tailwindcss.com"></script>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -224,14 +215,23 @@
 			background-color: rgba(248, 250, 252, 0.3) !important;
 		}
 
-		.export-mode .grid {
-			gap: 20px !important;
-			margin: 0 auto !important;
+		/* Force consistent sizing regardless of source dimensions */
+		.export-mode .grid img,
+		.export-mode .space-y-6 img,
+		.export-mode .items-center img {
+			object-fit: contain !important;
+			object-position: center !important;
+			background-color: rgba(248, 250, 252, 0.3) !important;
 		}
 
-		.export-mode main {
-			padding: 20px !important;
-			margin: 0 auto !important;
+		/* Specific 1:1 aspect ratio for Dev Life Cycle image */
+		.export-mode img[src*="Dev Life Cycle"] {
+			aspect-ratio: 1 / 1 !important;
+			width: 100% !important;
+			height: auto !important;
+			object-fit: contain !important;
+			object-position: center !important;
+		}
 		}
 
 		.export-mode section {
@@ -460,10 +460,10 @@
 			<section class="my-16">
 				<h2 class="section-title text-3xl text-center mb-10">Bạn Sẽ Chinh Phục Điều Gì?</h2>
 				<div class="grid md:grid-cols-2 gap-8 items-center">
-					<div class="card overflow-hidden">
+					<div class="card">
 						<img src="../imgs/Dev Life Cycle.png"
 							alt="Sơ đồ vòng đời phát triển phần mềm, minh họa các giai đoạn từ lập kế hoạch đến triển khai và bảo trì. Tỉ lệ khung hình 4:3."
-							class="rounded-lg object-cover w-full h-full">
+							class="rounded-lg object-contain w-full">
 					</div>
 					<div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
 						<div class="card p-6 text-center">
