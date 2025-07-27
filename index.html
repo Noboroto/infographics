@@ -574,8 +574,8 @@
 			</h2>
 			<div class="mobile-select-container">
 				<select id="mobile-specialty-select" class="mobile-select">
-					<option value="faculty.html">Thông tin chung - Khoa CNTT</option>
-					<option value="pages/computer_science.html" selected>Khoa học Máy tính - KHMT</option>
+					<option value="faculty.html" selected>Thông tin chung - Khoa CNTT</option>
+					<option value="pages/computer_science.html">Khoa học Máy tính - KHMT</option>
 					<option value="pages/artificial_intelligence.html">Trí tuệ Nhân tạo - TTNT</option>
 					<option value="pages/computer_vision.html">Thị Giác Máy Tính & Điều Khiển Học Thông Minh</option>
 					<option value="pages/knowledge_engineer.html">Công nghệ Tri thức - CNTThuc</option>
@@ -598,7 +598,7 @@
 
 				<div id="sidebar-container" class="main-container sidebar-container p-4 md:p-6 lg:sticky lg:top-4">
 					<div class="space-y-3">
-						<div class="menu-item p-4 text-center" onclick="loadContent('faculty.html', this)">
+						<div class="menu-item p-4 text-center active" onclick="loadContent('faculty.html', this)">
 							<i data-lucide="graduation-cap" class="w-8 h-8 mx-auto mb-2 icon-color-faculty"></i>
 							<h3 class="font-bold text-sm">Thông tin chung</h3>
 							<p class="text-xs text-gray-600">Khoa CNTT</p>
@@ -610,7 +610,7 @@
 							<p class="text-xs text-gray-600">Quy trình xét tuyển</p>
 						</div> -->
 
-						<div class="menu-item p-4 text-center active" onclick="loadContent('pages/computer_science.html', this)">
+						<div class="menu-item p-4 text-center" onclick="loadContent('pages/computer_science.html', this)">
 							<i data-lucide="cpu" class="w-8 h-8 mx-auto mb-2 icon-color-cs"></i>
 							<h3 class="font-bold text-sm">Khoa học Máy tính</h3>
 							<p class="text-xs text-gray-600">KHMT - Computer Science</p>
@@ -656,7 +656,7 @@
 
 			<div class="lg:col-span-3 md:col-span-2">
 				<div class="content-container p-2 md:p-4">
-					<iframe id="content-frame" class="content-frame w-full" src="pages/computer_science.html" frameborder="0">
+					<iframe id="content-frame" class="content-frame w-full" src="faculty.html" frameborder="0">
 					</iframe>
 				</div>
 			</div>
