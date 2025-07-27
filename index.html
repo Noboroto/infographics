@@ -73,10 +73,9 @@
 			border-radius: 1rem;
 			box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 			background-color: white;
-			overflow: hidden;
 			position: relative;
-			height: calc(100vh - 3rem);
-			max-height: calc(100vh - 3rem);
+			height: calc(100vh - 3rem) !important;
+			max-height: calc(100vh - 3rem) !important;
 		}
 
 		.sidebar-container {
@@ -84,11 +83,6 @@
 			height: calc(100vh - 3rem);
 			max-height: calc(100vh - 3rem);
 			overflow-y: auto;
-		}
-
-		.content-frame {
-			height: calc(100vh - 3rem) !important;
-			max-height: calc(100vh - 3rem) !important;
 		}
 
 		.header-section {
@@ -685,7 +679,7 @@
 			<!-- Content Column -->
 			<div id="content-column" class="lg:col-span-3 md:col-span-2">
 				<div id="main-content-container" class="content-container p-2 md:p-4">
-					<iframe id="content-frame" class="content-frame w-full" src="faculty.html" frameborder="0">
+					<iframe id="content-frame" class="content-frame w-full" src="faculty.html" frameborder="0" scrolling="yes">
 					</iframe>
 				</div>
 			</div>
