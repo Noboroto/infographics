@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Infographic: Kỹ Thuật Phần Mềm – Từ Ý Tưởng Đến Kiệt Tác Số</title>
+	<script src="https://cdn.tailwindcss.com"></script>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;900&family=Poppins:wght@700;900&display=swap"
+		rel="stylesheet">
+	<script src="https://unpkg.com/lucide@latest"></script>
+	<script src="../auto-image-converter.js"></script>
+	<style>
+		body {
+			font-family: 'Be Vietnam Pro', sans-serif;
+			background-color: #EFF6FF;
+			/* Blue-50 */
+			color: #1E3A8A;
+			/* Blue-900 */
+		}
+
+		.section-title {
+			font-weight: 900;
+			color: #1D4ED8;
+			/* Blue-700 */
+			text-transform: uppercase;
+			letter-spacing: 1px;
+		}
+
+		.card {
+			background-color: #FFFFFF;
+			border: 1px solid #DBEAFE;
+			/* Blue-200 */
+			transition: all 0.3s ease;
+			box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+			border-radius: 0.75rem;
+			display: flex;
+			flex-direction: column;
+		}
+
+		.card-content {
+			flex-grow: 1;
+		}
+
+		.card:hover {
+			transform: translateY(-5px);
+			border-color: #2563EB;
+			/* Blue-600 */
+			box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+		}
+
+		.icon {
+			color: #2563EB;
+			width: 48px;
+			height: 48px;
+		}
+
+		.header-bg {
+			background-image: url('../imgs/Software\ Engineer.png');
+			background-size: cover;
+			background-position: center;
+			position: relative;
+		}
+
+		.header-bg::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background-color: rgba(30, 64, 175, 0.8);
+			/* Blue-800 with opacity */
+		}
+
+		.header-content {
+			position: relative;
+			z-index: 10;
+		}
+
+		.major {
+			font-size: 2.75rem;
+			font-weight: 900;
+			color: #FFFFFF;
+			text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+		}
+
+		.english {
+			font-size: 1.5rem;
+			font-weight: 600;
+			color: #93C5FD;
+			text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+			margin-bottom: 1rem;
+		}
+
+		.major-slogan {
+			font-size: 1.5rem;
+			font-weight: 700;
+			color: #BFDBFE;
+		}
+
+		.faculty {
+			font-size: 1rem;
+			font-weight: 500;
+			color: #E2E8F0;
+		}
+
+		.faculty-slogan {
+			font-size: 1.25rem;
+			font-weight: 600;
+			color: #93C5FD;
+			font-style: italic;
+			text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+			margin-top: 1rem;
+
+
+		}
+
+		/* Export Mode CSS - Center align page content */
+		.export-mode #infographic-content {
+			width: 1096px !important;
+			max-width: none !important;
+			margin: 0 auto !important;
+			padding: 20px !important;
+			background: white !important;
+			display: block !important;
+		}
+
+		.export-mode .header-bg {
+			padding: 60px 24px !important;
+			margin: 0 auto 32px auto !important;
+			text-align: center !important;
+		}
+
+		.export-mode .header-content {
+			text-align: center !important;
+			margin: 0 auto !important;
+		}
+
+		.export-mode .header-content h1 {
+			font-size: 2.75rem !important;
+			text-align: center !important;
+		}
+
+		/* Export Mode - Fixed Image Dimensions */
+		.export-mode img {
+			max-width: 100% !important;
+			height: auto !important;
+			object-fit: contain !important;
+			object-position: center !important;
+			background-color: transparent !important;
+			display: block !important;
+			margin: 0 auto !important;
+			border: none !important;
+			box-shadow: none !important;
+		}
+
+		/* Standard image containers in export mode */
+		.export-mode .card img {
+			width: 100% !important;
+			height: 250px !important;
+			object-fit: contain !important;
+			object-position: center !important;
+			border-radius: 0.5rem !important;
+			background-color: rgba(248, 250, 252, 0.5) !important;
+		}
+
+		/* Overflow hidden containers - prevent image distortion */
+		.export-mode .card.overflow-hidden {
+			overflow: visible !important;
+		}
+
+		.export-mode .card.overflow-hidden img {
+			height: 300px !important;
+			object-fit: contain !important;
+			object-position: center !important;
+		}
+
+		/* Specific fixes for placeholder images with different aspect ratios */
+		.export-mode img[src*="placehold.co"] {
+			background-color: rgba(248, 250, 252, 0.8) !important;
+			border: 1px solid rgba(226, 232, 240, 0.5) !important;
+		}
+
+		/* Wide images (3:2 aspect ratio like 600x400) */
+		.export-mode img[src*="600x400"] {
+			width: 100% !important;
+			height: 200px !important;
+			max-height: 200px !important;
+		}
+
+		/* Square-ish images (4:3 aspect ratio like 800x600) */
+		.export-mode img[src*="800x600"] {
+			width: 100% !important;
+			height: 240px !important;
+			max-height: 240px !important;
+		}
+
+		/* Tall images (4:5 aspect ratio like 800x1000) */
+		.export-mode img[src*="800x1000"] {
+			width: 100% !important;
+			height: 300px !important;
+			max-height: 300px !important;
+		}
+
+		/* Force consistent sizing regardless of source dimensions */
+		.export-mode .grid img,
+		.export-mode .space-y-6 img,
+		.export-mode .items-center img {
+			object-fit: contain !important;
+			object-position: center !important;
+			background-color: rgba(248, 250, 252, 0.3) !important;
+		}
+
+		/* Force consistent sizing regardless of source dimensions */
+		.export-mode .grid img,
+		.export-mode .space-y-6 img,
+		.export-mode .items-center img {
+			object-fit: contain !important;
+			object-position: center !important;
+			background-color: rgba(248, 250, 252, 0.3) !important;
+		}
+
+		/* Specific 1:1 aspect ratio for Dev Life Cycle image */
+		.export-mode img[src*="Dev Life Cycle"] {
+			aspect-ratio: 1 / 1 !important;
+			width: 100% !important;
+			height: auto !important;
+			object-fit: contain !important;
+			object-position: center !important;
+		}
+		}
+
+		.export-mode section {
+			margin: 32px auto !important;
+		}
+
+		.export-mode .section-title {
+			text-align: center !important;
+			margin: 0 auto 24px auto !important;
+		}
+
+		/* Enhanced text shadow for better visibility */
+		.export-mode .header-content h1,
+		.export-mode .header-content p {
+			text-shadow: 0 4px 8px rgba(0, 0, 0, 0.7), 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+		}
+
+		.export-mode .header-content h1 {
+			color: #FFFFFF !important;
+			text-shadow: 0 4px 12px rgba(0, 0, 0, 0.8), 0 2px 6px rgba(0, 0, 0, 0.6) !important;
+			filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3)) !important;
+		}
+
+		/* Enhanced responsive design - Does not affect export PNG */
+		@media (max-width: 1024px) {
+			body:not(.export-mode) #infographic-content {
+				padding: 1rem !important;
+			}
+
+			body:not(.export-mode) .header-bg {
+				padding: 3rem 1rem !important;
+			}
+
+			body:not(.export-mode) .header-content h1 {
+				font-size: 2rem !important;
+				line-height: 1.2 !important;
+			}
+
+			body:not(.export-mode) .major {
+				font-size: 2rem !important;
+			}
+
+			body:not(.export-mode) .english {
+				font-size: 1.25rem !important;
+			}
+
+			body:not(.export-mode) .major-slogan {
+				font-size: 1.25rem !important;
+			}
+
+			body:not(.export-mode) .grid {
+				grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+				gap: 1rem !important;
+			}
+
+			body:not(.export-mode) .section-title {
+				font-size: 1.75rem !important;
+			}
+
+			body:not(.export-mode) main {
+				padding: 1rem !important;
+			}
+
+			body:not(.export-mode) section {
+				margin: 2rem 0 !important;
+			}
+		}
+
+		@media (max-width: 768px) {
+			body:not(.export-mode) .header-bg {
+				padding: 2rem 0.75rem !important;
+			}
+
+			body:not(.export-mode) .header-content h1 {
+				font-size: 1.5rem !important;
+			}
+
+			body:not(.export-mode) .major {
+				font-size: 1.5rem !important;
+			}
+
+			body:not(.export-mode) .english {
+				font-size: 1rem !important;
+			}
+
+			body:not(.export-mode) .major-slogan {
+				font-size: 1rem !important;
+			}
+
+			body:not(.export-mode) .faculty-slogan {
+				font-size: 1rem !important;
+			}
+
+			body:not(.export-mode) .grid {
+				grid-template-columns: 1fr !important;
+				gap: 0.75rem !important;
+			}
+
+			body:not(.export-mode) .section-title {
+				font-size: 1.5rem !important;
+			}
+
+			body:not(.export-mode) .card {
+				padding: 1rem !important;
+			}
+
+			body:not(.export-mode) .card h3 {
+				font-size: 1.125rem !important;
+			}
+
+			body:not(.export-mode) .card p {
+				font-size: 0.875rem !important;
+			}
+		}
+
+		@media (max-width: 640px) {
+			body:not(.export-mode) #infographic-content {
+				padding: 0.5rem !important;
+			}
+
+			body:not(.export-mode) .header-bg {
+				padding: 1.5rem 0.5rem !important;
+			}
+
+			body:not(.export-mode) .header-content h1 {
+				font-size: 1.25rem !important;
+			}
+
+			body:not(.export-mode) .major {
+				font-size: 1.25rem !important;
+			}
+
+			body:not(.export-mode) .english {
+				font-size: 0.875rem !important;
+			}
+
+			body:not(.export-mode) .major-slogan {
+				font-size: 0.875rem !important;
+			}
+
+			body:not(.export-mode) .faculty {
+				font-size: 0.75rem !important;
+			}
+
+			body:not(.export-mode) .faculty-slogan {
+				font-size: 0.875rem !important;
+			}
+
+			body:not(.export-mode) .section-title {
+				font-size: 1.25rem !important;
+			}
+
+			body:not(.export-mode) main {
+				padding: 0.75rem !important;
+			}
+
+			body:not(.export-mode) section {
+				margin: 1.5rem 0 !important;
+			}
+
+			body:not(.export-mode) .card {
+				padding: 0.75rem !important;
+			}
+
+			body:not(.export-mode) .card h3 {
+				font-size: 1rem !important;
+			}
+
+			body:not(.export-mode) .card p {
+				font-size: 0.8rem !important;
+			}
+
+			body:not(.export-mode) .icon {
+				width: 32px !important;
+				height: 32px !important;
+			}
+		}
+	
+        /* Dynamic Export Mode Styles */
+        .export-mode {
+            print-color-adjust: exact !important;
+            -webkit-print-color-adjust: exact !important;
+            color-adjust: exact !important;
+        }
+        
+        .export-mode * {
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+        
+        .export-mode img {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            max-width: 100% !important;
+            height: auto !important;
+        }
+        
+        .export-mode [data-lucide] {
+            display: inline-block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+        
+        .export-mode [data-lucide] svg {
+            display: inline !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+	</style>
+</head>
+
+<body class="antialiased">
+	<div class="max-w-5xl mx-auto bg-white" id="infographic-content">
+		<header class="header-bg">
+			<div class="header-content text-center py-16 px-4">
+				<h1 class="major">KỸ THUẬT PHẦN MỀM</h1>
+				<p class="english">Software Engineering</p>
+				<p class="major-slogan">Kiến Tạo Phần Mềm Chất Lượng Cao</p>
+				<p class="faculty">Khoa Công nghệ thông tin, Trường Đại học Khoa học tự nhiên – ĐHQG-HCM</p>
+				<p class="faculty-slogan">"Tiên phong tri thức, kiến tạo tương lai"</p>
+			</div>
+		</header>
+
+		<main class="p-4 md:p-8">
+			<section class="my-16">
+				<h2 class="section-title text-3xl text-center mb-10">Bạn Sẽ Chinh Phục Điều Gì?</h2>
+				<div class="grid md:grid-cols-2 gap-8 items-center">
+					<div class="card">
+						<img src="../imgs/Dev Life Cycle.png"
+							alt="Sơ đồ vòng đời phát triển phần mềm, minh họa các giai đoạn từ lập kế hoạch đến triển khai và bảo trì. Tỉ lệ khung hình 4:3."
+							class="rounded-lg object-contain w-full">
+					</div>
+					<div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+						<div class="card p-6 text-center">
+							<div class="flex justify-center mb-4"><i data-lucide="clipboard-check" class="icon"></i></div>
+							<div class="card-content">
+								<h3 class="text-xl font-bold text-slate-800 mb-2">Quy Trình Chuyên Nghiệp</h3>
+								<p class="text-slate-600 text-sm">Nắm vững các mô hình phát triển phần mềm hiện đại (Agile, Scrum,
+									DevOps) để xây dựng sản phẩm một cách hiệu quả.</p>
+							</div>
+						</div>
+						<div class="card p-6 text-center">
+							<div class="flex justify-center mb-4"><i data-lucide="blocks" class="icon"></i></div>
+							<div class="card-content">
+								<h3 class="text-xl font-bold text-slate-800 mb-2">Kiến Trúc Hệ Thống Lớn</h3>
+								<p class="text-slate-600 text-sm">Học cách thiết kế và xây dựng các hệ thống phần mềm phức tạp, có khả
+									năng mở rộng và chịu tải cao.</p>
+							</div>
+						</div>
+						<div class="card p-6 text-center">
+							<div class="flex justify-center mb-4"><i data-lucide="shield-check" class="icon"></i></div>
+							<div class="card-content">
+								<h3 class="text-xl font-bold text-slate-800 mb-2">Đảm Bảo Chất Lượng</h3>
+								<p class="text-slate-600 text-sm">Trang bị kỹ năng kiểm thử, gỡ lỗi và bảo trì để đảm bảo phần mềm hoạt
+									động ổn định và đáng tin cậy.</p>
+							</div>
+						</div>
+						<div class="card p-6 text-center">
+							<div class="flex justify-center mb-4"><i data-lucide="users" class="icon"></i></div>
+							<div class="card-content">
+								<h3 class="text-xl font-bold text-slate-800 mb-2">Làm Việc Nhóm & Hợp Tác</h3>
+								<p class="text-slate-600 text-sm">Phát triển kỹ năng làm việc nhóm, giao tiếp và sử dụng các công cụ hợp
+									tác hiện đại để tạo ra các hệ sinh thái phần mềm.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="my-16">
+				<h2 class="section-title text-3xl text-center mb-10 flex items-center justify-center gap-3">
+					<i data-lucide="orbit" class="icon"></i>
+					KTPM Giữa "Vũ Trụ" IT
+				</h2>
+				<div class="space-y-8">
+					<div class="card p-6 grid md:grid-cols-2 gap-6 items-center">
+						<div>
+							<div class="flex items-center mb-4"><i data-lucide="cpu" class="icon mr-4"></i>
+								<h4 class="text-xl font-bold text-slate-800">vs. Khoa học Máy tính</h4>
+							</div>
+							<p class="text-slate-600"><b>KHMT</b> tập trung vào lý thuyết và thuật toán (tạo ra "viên gạch").
+								<b>KTPM</b> tập trung vào quy trình và kỹ thuật để sử dụng những "viên gạch" đó xây nên những "tòa nhà"
+								phần mềm vững chắc và hiệu quả.
+							</p>
+						</div>
+						<img src="../imgs/SE_Vs_CS.png"
+							alt="Hình ảnh so sánh ẩn dụ giữa kiến trúc sư (KTPM) và người làm gạch (KHMT). Tỉ lệ khung hình 3:2."
+							class="rounded-lg object-cover w-full h-full">
+					</div>
+					<div class="card p-6 grid md:grid-cols-2 gap-6 items-center">
+						<img src="../imgs/Architect_Vs_Builder.png"
+							alt="Hình ảnh so sánh ẩn dụ giữa người quy hoạch (HTTT) và người xây dựng (KTPM). Tỉ lệ khung hình 3:2."
+							class="rounded-lg object-cover w-full h-full md:order-last">
+						<div>
+							<div class="flex items-center mb-4"><i data-lucide="database" class="icon mr-4"></i>
+								<h4 class="text-xl font-bold text-slate-800">vs. Hệ thống Thông tin</h4>
+							</div>
+							<p class="text-slate-600"><b>HTTT</b> là cầu nối giữa kinh doanh và công nghệ, tập trung vào việc "cần xây
+								cái gì?". <b>KTPM</b> tập trung vào việc "xây nó như thế nào?" một cách chuyên nghiệp và tối ưu nhất.
+							</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="my-16">
+				<h2 class="section-title text-3xl text-center mb-12">Giải Mã Các Vị Trí Nghề Nghiệp</h2>
+				<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+					<div class="card p-6 flex flex-col items-center text-center">
+						<i data-lucide="code" class="icon mb-4"></i>
+						<h4 class="text-lg font-bold text-slate-800 mb-2">Kỹ sư Phần mềm</h4>
+						<p class="text-slate-600 text-sm">Trực tiếp viết mã, xây dựng và phát triển các tính năng cho sản phẩm phần
+							mềm (Frontend, Backend, Full-stack, Mobile).</p>
+					</div>
+					<div class="card p-6 flex flex-col items-center text-center">
+						<i data-lucide="settings" class="icon mb-4"></i>
+						<h4 class="text-lg font-bold text-slate-800 mb-2">Kỹ sư DevOps</h4>
+						<p class="text-slate-600 text-sm">Tự động hóa quy trình phát triển, triển khai và vận hành hệ thống phần mềm
+							trên các nền tảng đám mây.</p>
+					</div>
+					<div class="card p-6 flex flex-col items-center text-center">
+						<i data-lucide="bug" class="icon mb-4"></i>
+						<h4 class="text-lg font-bold text-slate-800 mb-2">Kỹ sư Đảm bảo Chất lượng (QA/QC)</h4>
+						<p class="text-slate-600 text-sm">Chịu trách nhiệm kiểm thử (tự động và thủ công), tìm lỗi và đảm bảo phần
+							mềm đạt chất lượng cao nhất.</p>
+					</div>
+					<div class="card p-6 flex flex-col items-center text-center">
+						<i data-lucide="clipboard-check" class="icon mb-4"></i>
+						<h4 class="text-lg font-bold text-slate-800 mb-2">Quản lý Dự án (PM)</h4>
+						<p class="text-slate-600 text-sm">Lên kế hoạch, điều phối nhân sự, quản lý tiến độ và ngân sách để đảm bảo
+							dự án phần mềm thành công.</p>
+					</div>
+					<div class="card p-6 flex flex-col items-center text-center">
+						<i data-lucide="mouse-pointer" class="icon mb-4"></i>
+						<h4 class="text-lg font-bold text-slate-800 mb-2">Chuyên gia Giao diện/Trải nghiệm người dùng (UI/UX)</h4>
+						<p class="text-slate-600 text-sm">Thiết kế giao diện đẹp mắt và trải nghiệm người dùng mượt mà, dễ sử dụng.
+						</p>
+					</div>
+					<div class="card p-6 flex flex-col items-center text-center">
+						<i data-lucide="user-search" class="icon mb-4"></i>
+						<h4 class="text-lg font-bold text-slate-800 mb-2">Chuyên viên Phân tích Nghiệp vụ (BA)</h4>
+						<p class="text-slate-600 text-sm">Là cầu nối giữa khách hàng và đội ngũ phát triển, phân tích yêu cầu để xây
+							dựng đúng sản phẩm người dùng cần.</p>
+					</div>
+				</div>
+			</section>
+
+			<section class="my-16">
+				<h2 class="section-title text-3xl text-center mb-12">Ứng Dụng Thực Tế</h2>
+				<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+					<div class="card p-6 flex items-start">
+						<i data-lucide="smartphone" class="icon mr-4 flex-shrink-0"></i>
+						<div>
+							<h4 class="text-lg font-bold text-slate-800 mb-2">Ứng dụng di động</h4>
+							<p class="text-slate-600 text-sm">Các ứng dụng bạn sử dụng hàng ngày như Grab, Momo, TikTok, Zalo.</p>
+						</div>
+					</div>
+					<div class="card p-6 flex items-start">
+						<i data-lucide="shopping-cart" class="icon mr-4 flex-shrink-0"></i>
+						<div>
+							<h4 class="text-lg font-bold text-slate-800 mb-2">Nền tảng Thương mại điện tử</h4>
+							<p class="text-slate-600 text-sm">Các hệ thống mua sắm trực tuyến phức tạp như Tiki, Shopee, Lazada.</p>
+						</div>
+					</div>
+					<div class="card p-6 flex items-start">
+						<i data-lucide="landmark" class="icon mr-4 flex-shrink-0"></i>
+						<div>
+							<h4 class="text-lg font-bold text-slate-800 mb-2">Hệ thống Ngân hàng & Tài chính</h4>
+							<p class="text-slate-600 text-sm">Các phần mềm giao dịch, quản lý tài khoản an toàn và bảo mật cho ngân
+								hàng.</p>
+						</div>
+					</div>
+					<div class="card p-6 flex items-start">
+						<i data-lucide="cloud" class="icon mr-4 flex-shrink-0"></i>
+						<div>
+							<h4 class="text-lg font-bold text-slate-800 mb-2">Dịch vụ Đám mây</h4>
+							<p class="text-slate-600 text-sm">Các nền tảng toàn cầu như Google Drive, Dropbox, và các dịch vụ của AWS,
+								Azure.</p>
+						</div>
+					</div>
+					<div class="card p-6 flex items-start">
+						<i data-lucide="building-2" class="icon mr-4 flex-shrink-0"></i>
+						<div>
+							<h4 class="text-lg font-bold text-slate-800 mb-2">Phần mềm Doanh nghiệp</h4>
+							<p class="text-slate-600 text-sm">Các hệ thống quản lý nguồn lực (ERP), quản lý nhân sự, kế toán cho các
+								tập đoàn.</p>
+						</div>
+					</div>
+					<div class="card p-6 flex items-start">
+						<i data-lucide="gamepad-2" class="icon mr-4 flex-shrink-0"></i>
+						<div>
+							<h4 class="text-lg font-bold text-slate-800 mb-2">Game & Giải trí</h4>
+							<p class="text-slate-600 text-sm">Xây dựng engine, logic và các hệ thống phức tạp cho các trò chơi điện
+								tử.</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- SECTION: VÌ SAO NÊN CHỌN FIT@HCMUS -->
+			<section class="my-16">
+				<h2 class="section-title text-3xl text-center mb-10">Vì sao nên chọn KTPM tại <span
+						class="text-blue-600 font-bold">fit@hcmus</span>?</h2>
+				<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+					<div class="card p-6">
+						<h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center"><i data-lucide="hammer"
+								class="icon mr-3 h-8 w-8"></i>Tập trung vào quy trình thực tiễn</h3>
+						<p class="text-slate-600">Chương trình học nhấn mạnh vào các quy trình phát triển phần mềm hiện đại như
+							Agile, Scrum, DevOps, giúp bạn sẵn sàng tham gia vào các dự án thực tế ngay khi ra trường.</p>
+					</div>
+					<div class="card p-6">
+						<h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center"><i data-lucide="users"
+								class="icon mr-3 h-8 w-8"></i>Phát triển kỹ năng toàn diện</h3>
+						<p class="text-slate-600">Bạn không chỉ học "code" mà còn được rèn luyện các kỹ năng quan trọng khác như
+							quản lý dự án, làm việc nhóm, giao tiếp và đảm bảo chất lượng sản phẩm.</p>
+					</div>
+					<div class="card p-6">
+						<h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center"><i data-lucide="arrow-right-left"
+								class="icon mr-3 h-8 w-8"></i>Cầu nối trực tiếp đến ngành công nghiệp</h3>
+						<p class="text-slate-600">Chuyên ngành có mối liên kết chặt chẽ với các doanh nghiệp phần mềm, tạo nhiều cơ
+							hội thực tập và việc làm, giúp bạn biến ý tưởng thành sản phẩm thực thụ.</p>
+					</div>
+				</div>
+			</section>
+		</main>
+	</div>
+
+	<script>
+		lucide.createIcons();
+	</script>
+
+
+    <script>
+        // Dynamic Image Converter for Export
+        class ExportImageConverter {
+            constructor() {
+                this.imageCache = new Map();
+                this.isExportMode = false;
+            }
+            
+            async convertImageToBase64(imgElement) {
+                const src = imgElement.getAttribute('data-original-src') || imgElement.src;
+                
+                // Skip if already converted or external URL
+                if (src.startsWith('data:') || src.startsWith('http')) {
+                    return;
+                }
+                
+                // Check cache first
+                if (this.imageCache.has(src)) {
+                    imgElement.src = this.imageCache.get(src);
+                    return;
+                }
+                
+                try {
+                    // Save original src
+                    if (!imgElement.getAttribute('data-original-src')) {
+                        imgElement.setAttribute('data-original-src', src);
+                    }
+                    
+                    // Convert to absolute URL for fetch
+                    const response = await fetch(src);
+                    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                    
+                    const blob = await response.blob();
+                    const reader = new FileReader();
+                    
+                    reader.onload = () => {
+                        const base64Data = reader.result;
+                        this.imageCache.set(src, base64Data);
+                        imgElement.src = base64Data;
+                        console.log(`✅ Converted image: ${src}`);
+                    };
+                    
+                    reader.readAsDataURL(blob);
+                } catch (error) {
+                    console.warn(`⚠️ Failed to convert image: ${src}`, error);
+                }
+            }
+            
+            async enableExportMode() {
+                if (this.isExportMode) return;
+                
+                this.isExportMode = true;
+                document.body.classList.add('export-mode');
+                
+                console.log('🔄 Converting images for export...');
+                
+                const images = document.querySelectorAll('img');
+                const conversions = Array.from(images).map(img => this.convertImageToBase64(img));
+                
+                await Promise.all(conversions);
+                console.log('✅ All images converted for export');
+                
+                // Trigger icon re-creation
+                if (typeof lucide !== 'undefined' && lucide.createIcons) {
+                    lucide.createIcons();
+                }
+            }
+            
+            disableExportMode() {
+                if (!this.isExportMode) return;
+                
+                this.isExportMode = false;
+                document.body.classList.remove('export-mode');
+                
+                // Restore original images
+                const images = document.querySelectorAll('img[data-original-src]');
+                images.forEach(img => {
+                    img.src = img.getAttribute('data-original-src');
+                });
+                
+                console.log('✅ Export mode disabled, images restored');
+            }
+        }
+        
+        // Global instance
+        window.exportConverter = new ExportImageConverter();
+        
+        // Auto-enable export mode detection
+        function detectExportMode() {
+            // Check for common export tool indicators
+            const indicators = [
+                () => window.location.search.includes('export'),
+                () => window.location.hash.includes('export'),
+                () => document.body.classList.contains('export-mode'),
+                () => window.navigator.webdriver, // Selenium
+                () => window.puppeteer, // Puppeteer
+                () => window.phantom, // PhantomJS
+                () => window.__nightmare, // Nightmare
+                () => window.callPhantom, // PhantomJS
+                () => document.documentElement.getAttribute('data-export') === 'true'
+            ];
+            
+            return indicators.some(check => {
+                try { return check(); } catch(e) { return false; }
+            });
+        }
+        
+        // Export control functions
+        window.enableExportMode = () => window.exportConverter.enableExportMode();
+        window.disableExportMode = () => window.exportConverter.disableExportMode();
+        
+        // Auto-detection on load
+        document.addEventListener('DOMContentLoaded', () => {
+            if (detectExportMode()) {
+                console.log('🎯 Export mode detected, enabling...');
+                window.exportConverter.enableExportMode();
+            }
+        });
+        
+        // Manual trigger via console or URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('mode') === 'export') {
+            window.addEventListener('load', () => {
+                window.exportConverter.enableExportMode();
+            });
+        }
+    </script>
+</body>
+
+</html>

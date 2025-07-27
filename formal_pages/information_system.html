@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Infographic: Hệ Thống Thông Tin – Cầu Nối Giữa Công Nghệ & Doanh Nghiệp</title>
+	<script src="https://cdn.tailwindcss.com"></script>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;900&family=Poppins:wght@700;900&display=swap"
+		rel="stylesheet">
+	<script src="https://unpkg.com/lucide@latest"></script>
+	<script src="../auto-image-converter.js"></script>
+	<style>
+		body {
+			font-family: 'Be Vietnam Pro', sans-serif;
+			background-color: #ECFEFF;
+			/* Cyan-50 */
+			color: #164E63;
+			/* Cyan-900 */
+		}
+
+		.section-title {
+			font-weight: 900;
+			color: #0891B2;
+			/* Cyan-600 */
+			text-transform: uppercase;
+			letter-spacing: 1px;
+		}
+
+		.card {
+			background-color: #FFFFFF;
+			border: 1px solid #CFFAFE;
+			/* Cyan-200 */
+			transition: all 0.3s ease;
+			box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+			border-radius: 0.75rem;
+			display: flex;
+			flex-direction: column;
+		}
+
+		.card-content {
+			flex-grow: 1;
+		}
+
+		.card:hover {
+			transform: translateY(-5px);
+			border-color: #06B6D4;
+			/* Cyan-500 */
+			box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+		}
+
+		.icon {
+			color: #06B6D4;
+			width: 48px;
+			height: 48px;
+		}
+
+		.header-bg {
+			background-image: url('/imgs/Information_System.png');
+			background-size: cover;
+			background-position: center;
+			position: relative;
+		}
+
+		.header-bg::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background-color: rgba(22, 78, 99, 0.8);
+			/* Cyan-900 with opacity */
+		}
+
+		.header-content {
+			position: relative;
+			z-index: 10;
+		}
+
+		.major {
+			font-size: 2.75rem;
+			font-weight: 900;
+			color: #FFFFFF;
+			text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+		}
+
+		.english {
+			font-size: 1.5rem;
+			font-weight: 600;
+			color: #67E8F9;
+			/* Cyan-300 */
+			text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+			margin-bottom: 1rem;
+		}
+
+		.major-slogan {
+			font-size: 1.5rem;
+			font-weight: 700;
+			color: #A5F3FC;
+			/* Cyan-200 */
+		}
+
+		.faculty {
+			font-size: 1rem;
+			font-weight: 500;
+			color: #E0F2F7;
+		}
+
+		.faculty-slogan {
+			font-size: 1.25rem;
+			font-weight: 600;
+			color: #67E8F9;
+			/* Cyan-300 */
+			font-style: italic;
+			text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+			margin-top: 1rem;
+		}
+
+		/* Export Mode CSS - Center align page content */
+		.export-mode #infographic-content {
+			width: 1096px !important;
+			max-width: none !important;
+			margin: 0 auto !important;
+			padding: 20px !important;
+			background: white !important;
+			display: block !important;
+		}
+
+		.export-mode .header-bg {
+			padding: 60px 24px !important;
+			margin: 0 auto 32px auto !important;
+			text-align: center !important;
+		}
+
+		.export-mode .header-content {
+			text-align: center !important;
+			margin: 0 auto !important;
+		}
+
+		.export-mode .header-content h1 {
+			font-size: 2.75rem !important;
+			text-align: center !important;
+		}
+
+		/* Export Mode - Fixed Image Dimensions */
+		.export-mode img {
+			max-width: 100% !important;
+			height: auto !important;
+			object-fit: contain !important;
+			object-position: center !important;
+			background-color: transparent !important;
+			display: block !important;
+			margin: 0 auto !important;
+			border: none !important;
+			box-shadow: none !important;
+		}
+
+		/* Standard image containers in export mode */
+		.export-mode .card img {
+			width: 100% !important;
+			height: 250px !important;
+			object-fit: contain !important;
+			object-position: center !important;
+			border-radius: 0.5rem !important;
+			background-color: rgba(248, 250, 252, 0.5) !important;
+		}
+
+		/* Overflow hidden containers - prevent image distortion */
+		.export-mode .card.overflow-hidden {
+			overflow: visible !important;
+		}
+
+		.export-mode .card.overflow-hidden img {
+			height: 300px !important;
+			object-fit: contain !important;
+			object-position: center !important;
+		}
+
+		/* Specific fixes for placeholder images with different aspect ratios */
+		.export-mode img[src*="placehold.co"] {
+			background-color: rgba(248, 250, 252, 0.8) !important;
+			border: 1px solid rgba(226, 232, 240, 0.5) !important;
+		}
+
+		/* Wide images (3:2 aspect ratio like 600x400) */
+		.export-mode img[src*="600x400"] {
+			width: 100% !important;
+			height: 200px !important;
+			max-height: 200px !important;
+		}
+
+		/* Square-ish images (4:3 aspect ratio like 800x600) */
+		.export-mode img[src*="800x600"] {
+			width: 100% !important;
+			height: 240px !important;
+			max-height: 240px !important;
+		}
+
+		/* Tall images (4:5 aspect ratio like 800x1000) */
+		.export-mode img[src*="800x1000"] {
+			width: 100% !important;
+			height: 300px !important;
+			max-height: 300px !important;
+		}
+
+		/* Force consistent sizing regardless of source dimensions */
+		.export-mode .grid img,
+		.export-mode .space-y-6 img,
+		.export-mode .items-center img {
+			object-fit: contain !important;
+			object-position: center !important;
+			background-color: rgba(248, 250, 252, 0.3) !important;
+		}
+
+		/* Standard image containers in export mode */
+		.export-mode .card img {
+			width: 100% !important;
+			height: 250px !important;
+			object-fit: contain !important;
+			object-position: center !important;
+			border-radius: 0.5rem !important;
+			background-color: rgba(248, 250, 252, 0.5) !important;
+		}
+
+		/* Specific image size fixes for different aspect ratios */
+		.export-mode .card.overflow-hidden img {
+			height: 300px !important;
+			object-fit: contain !important;
+			object-position: center !important;
+		}
+
+		/* Wide images (3:2 aspect ratio) */
+		.export-mode .grid img[src*="600x400"] {
+			width: 100% !important;
+			height: 200px !important;
+			object-fit: contain !important;
+		}
+
+		/* Square-ish images (4:3 aspect ratio) */
+		.export-mode .grid img[src*="800x600"] {
+			width: 100% !important;
+			height: 240px !important;
+			object-fit: contain !important;
+		}
+
+		/* Tall images (4:5 aspect ratio) */
+		.export-mode .grid img[src*="800x1000"] {
+			width: 100% !important;
+			height: 300px !important;
+			object-fit: contain !important;
+		}
+
+		/* Ensure all images are properly contained and centered */
+		.export-mode img {
+			display: block !important;
+			margin: 0 auto !important;
+			border: none !important;
+			box-shadow: none !important;
+		}
+
+		/* Enhanced export mode layout */
+		.export-mode .grid {
+			gap: 20px !important;
+			margin: 0 auto !important;
+		}
+
+		.export-mode main {
+			padding: 20px !important;
+			margin: 0 auto !important;
+		}
+
+		.export-mode section {
+			margin: 32px auto !important;
+		}
+
+		.export-mode .section-title {
+			text-align: center !important;
+			margin: 0 auto 24px auto !important;
+		}
+
+		/* Enhanced text shadow for better visibility */
+		.export-mode .header-content h1,
+		.export-mode .header-content p {
+			text-shadow: 0 4px 8px rgba(0, 0, 0, 0.7), 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+		}
+
+		.export-mode .header-content h1 {
+			color: #FFFFFF !important;
+			text-shadow: 0 4px 12px rgba(0, 0, 0, 0.8), 0 2px 6px rgba(0, 0, 0, 0.6) !important;
+			filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3)) !important;
+		}
+
+		/* Enhanced responsive design - Does not affect export PNG */
+		@media (max-width: 1024px) {
+			body:not(.export-mode) #infographic-content {
+				max-width: 100% !important;
+				margin: 0 !important;
+				padding: 16px !important;
+			}
+
+			body:not(.export-mode) .header-bg {
+				padding: 48px 16px !important;
+			}
+
+			body:not(.export-mode) .header-content h1 {
+				font-size: 2.25rem !important;
+			}
+
+			body:not(.export-mode) .major {
+				font-size: 2.25rem !important;
+			}
+
+			body:not(.export-mode) .english {
+				font-size: 1.25rem !important;
+			}
+
+			body:not(.export-mode) .major-slogan {
+				font-size: 1.25rem !important;
+			}
+
+			body:not(.export-mode) .grid {
+				grid-template-columns: 1fr !important;
+				gap: 16px !important;
+			}
+
+			body:not(.export-mode) .section-title {
+				font-size: 1.75rem !important;
+			}
+
+			body:not(.export-mode) main {
+				padding: 16px !important;
+			}
+
+			body:not(.export-mode) section {
+				margin: 24px auto !important;
+			}
+		}
+
+		@media (max-width: 768px) {
+			body:not(.export-mode) .header-bg {
+				padding: 32px 16px !important;
+			}
+
+			body:not(.export-mode) .header-content h1 {
+				font-size: 1.875rem !important;
+			}
+
+			body:not(.export-mode) .major {
+				font-size: 1.875rem !important;
+			}
+
+			body:not(.export-mode) .english {
+				font-size: 1.125rem !important;
+			}
+
+			body:not(.export-mode) .major-slogan {
+				font-size: 1.125rem !important;
+			}
+
+			body:not(.export-mode) .faculty-slogan {
+				font-size: 1rem !important;
+			}
+
+			body:not(.export-mode) .grid {
+				grid-template-columns: 1fr !important;
+				gap: 12px !important;
+			}
+
+			body:not(.export-mode) .section-title {
+				font-size: 1.5rem !important;
+			}
+
+			body:not(.export-mode) .card {
+				padding: 16px !important;
+			}
+
+			body:not(.export-mode) .card h3 {
+				font-size: 1.125rem !important;
+			}
+
+			body:not(.export-mode) .card p {
+				font-size: 0.875rem !important;
+			}
+		}
+
+		@media (max-width: 640px) {
+			body:not(.export-mode) #infographic-content {
+				padding: 12px !important;
+			}
+
+			body:not(.export-mode) .header-bg {
+				padding: 24px 12px !important;
+			}
+
+			body:not(.export-mode) .header-content h1 {
+				font-size: 1.5rem !important;
+			}
+
+			body:not(.export-mode) .major {
+				font-size: 1.5rem !important;
+			}
+
+			body:not(.export-mode) .english {
+				font-size: 1rem !important;
+			}
+
+			body:not(.export-mode) .major-slogan {
+				font-size: 1rem !important;
+			}
+
+			body:not(.export-mode) .faculty {
+				font-size: 0.875rem !important;
+			}
+
+			body:not(.export-mode) .faculty-slogan {
+				font-size: 0.875rem !important;
+			}
+
+			body:not(.export-mode) .section-title {
+				font-size: 1.25rem !important;
+			}
+
+			body:not(.export-mode) main {
+				padding: 12px !important;
+			}
+
+			body:not(.export-mode) section {
+				margin: 16px auto !important;
+			}
+
+			body:not(.export-mode) .card {
+				padding: 12px !important;
+			}
+
+			body:not(.export-mode) .card h3 {
+				font-size: 1rem !important;
+			}
+
+			body:not(.export-mode) .card p {
+				font-size: 0.8rem !important;
+			}
+
+			body:not(.export-mode) .icon {
+				width: 32px !important;
+				height: 32px !important;
+			}
+		}
+	
+        /* Dynamic Export Mode Styles */
+        .export-mode {
+            print-color-adjust: exact !important;
+            -webkit-print-color-adjust: exact !important;
+            color-adjust: exact !important;
+        }
+        
+        .export-mode * {
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+        
+        .export-mode img {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            max-width: 100% !important;
+            height: auto !important;
+        }
+        
+        .export-mode [data-lucide] {
+            display: inline-block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+        
+        .export-mode [data-lucide] svg {
+            display: inline !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+	</style>
+</head>
+
+<body class="antialiased">
+	<div class="max-w-5xl mx-auto bg-white" id="infographic-content">
+		<header class="header-bg">
+			<div class="header-content text-center py-16 px-4">
+				<h1 class="major">HỆ THỐNG THÔNG TIN</h1>
+				<p class="english">Information Systems</p>
+				<p class="major-slogan">"Kiến trúc sư" xây cầu nối giữa Công nghệ và Doanh nghiệp</p>
+				<p class="faculty">Khoa Công nghệ thông tin, Trường Đại học Khoa học tự nhiên – ĐHQG-HCM</p>
+				<p class="faculty-slogan">"Tiên phong tri thức, kiến tạo tương lai"</p>
+			</div>
+		</header>
+
+		<main class="p-4 md:p-8">
+			<!-- SECTION: ĐẶC TRƯNG NGÀNH -->
+			<section class="my-16">
+				<h2 class="section-title text-3xl text-center mb-10">HTTT "chất" như thế nào?</h2>
+				<div class="grid md:grid-cols-2 gap-8 items-center">
+					<div class="card overflow-hidden">
+						<img src="../imgs/Team Collaboration.png"
+							alt="Một nhóm chuyên gia đang thảo luận sôi nổi bên một bảng trắng đầy sơ đồ, tượng trưng cho sự kết hợp giữa phân tích kinh doanh và giải pháp kỹ thuật. Tỉ lệ khung hình 4:3."
+							class="object-cover w-full h-full rounded-lg">
+					</div>
+					<div class="space-y-6">
+						<div class="card p-6">
+							<h4 class="text-xl font-bold text-slate-800 mb-2">"Người phiên dịch" đa ngôn ngữ</h4>
+							<p class="text-slate-600">Bạn sẽ là người "dịch" ngôn ngữ kinh doanh của sếp thành yêu cầu kỹ thuật cho
+								team dev, và ngược lại. Bạn hiểu cả hai thế giới và kết nối họ lại với nhau.</p>
+						</div>
+						<div class="card p-6">
+							<h4 class="text-xl font-bold text-slate-800 mb-2">Bậc thầy về dữ liệu</h4>
+							<p class="text-slate-600">Không chỉ lưu trữ, bạn sẽ học cách "nói chuyện với dữ liệu", biến những con số
+								khô khan thành insight vàng, giúp doanh nghiệp đưa ra quyết định chiến lược.</p>
+						</div>
+						<div class="card p-6">
+							<h4 class="text-xl font-bold text-slate-800 mb-2">Nhà thiết kế hệ thống "ấn tượng"</h4>
+							<p class="text-slate-600">Từ hệ thống quản lý nhân sự, bán hàng (ERP) đến các sàn thương mại điện tử, bạn
+								sẽ là người thiết kế và xây dựng "xương sống" công nghệ cho cả một tổ chức.</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- SECTION: BẠN SẼ "CÂN" ĐƯỢC GÌ? -->
+			<section class="my-16">
+				<h2 class="section-title text-3xl text-center mb-10">Bạn sẽ "cân" được những gì?</h2>
+				<div class="grid md:grid-cols-2 lg:grid-cols-2 gap-8 text-center">
+					<div class="card p-6">
+						<div class="flex justify-center mb-4"><i data-lucide="database" class="icon"></i></div>
+						<div class="card-content">
+							<h3 class="text-xl font-bold text-slate-800 mb-2">Làm trùm Cơ sở dữ liệu</h3>
+							<p class="text-slate-600">Trở thành chuyên gia về việc thiết kế, xây dựng và quản trị các hệ thống CSDL
+								(SQL, NoSQL), đảm bảo dữ liệu luôn an toàn, chính xác và sẵn sàng "phục vụ".</p>
+						</div>
+					</div>
+					<div class="card p-6">
+						<div class="flex justify-center mb-4"><i data-lucide="bar-chart-3" class="icon"></i></div>
+						<div class="card-content">
+							<h3 class="text-xl font-bold text-slate-800 mb-2">Phân tích & "Kể chuyện" dữ liệu</h3>
+							<p class="text-slate-600">Sử dụng các công cụ mạnh mẽ để khai phá, phân tích và trực quan hóa dữ liệu, từ
+								đó tìm ra các xu hướng ẩn và dự báo tương lai cho doanh nghiệp.</p>
+						</div>
+					</div>
+					<div class="card p-6">
+						<div class="flex justify-center mb-4"><i data-lucide="lightbulb" class="icon"></i></div>
+						<div class="card-content">
+							<h3 class="text-xl font-bold text-slate-800 mb-2">Xây dựng hệ thống thông minh</h3>
+							<p class="text-slate-600">Thiết kế các hệ thống hỗ trợ ra quyết định (DSS), kinh doanh thông minh (BI), và
+								hệ thống gợi ý giúp doanh nghiệp hoạt động hiệu quả hơn.</p>
+						</div>
+					</div>
+					<div class="card p-6">
+						<div class="flex justify-center mb-4"><i data-lucide="workflow" class="icon"></i></div>
+						<div class="card-content">
+							<h3 class="text-xl font-bold text-slate-800 mb-2">Phân tích & Thiết kế hệ thống</h3>
+							<p class="text-slate-600">Trở thành kiến trúc sư trưởng, nắm vững phương pháp luận để khảo sát yêu cầu,
+								phân tích quy trình nghiệp vụ và thiết kế kiến trúc cho các dự án phức tạp.</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- SECTION: HƯỚNG NGHIÊN CỨU "CHẤT LỪ" -->
+			<section class="my-16">
+				<h2 class="section-title text-3xl text-center mb-10">Hướng nghiên cứu "tiên tiến"</h2>
+				<div class="card p-8">
+					<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-slate-700">
+						<div class="flex items-start"><i data-lucide="trending-up"
+								class="text-cyan-600 mr-3 mt-1 flex-shrink-0"></i><span>Kinh doanh thông minh (Business
+								Intelligence)</span></div>
+						<div class="flex items-start"><i data-lucide="database-zap"
+								class="text-cyan-600 mr-3 mt-1 flex-shrink-0"></i><span>Phân tích dữ liệu lớn (Big Data
+								Analytics)</span></div>
+						<div class="flex items-start"><i data-lucide="search"
+								class="text-cyan-600 mr-3 mt-1 flex-shrink-0"></i><span>Truy xuất thông tin (Information
+								Retrieval)</span></div>
+						<div class="flex items-start"><i data-lucide="thumbs-up"
+								class="text-cyan-600 mr-3 mt-1 flex-shrink-0"></i><span>Hệ thống gợi ý (Recommendation Systems)</span>
+						</div>
+						<div class="flex items-start"><i data-lucide="wifi"
+								class="text-cyan-600 mr-3 mt-1 flex-shrink-0"></i><span>Internet vạn vật (Internet of Things)</span>
+						</div>
+						<div class="flex items-start"><i data-lucide="shield"
+								class="text-cyan-600 mr-3 mt-1 flex-shrink-0"></i><span>Bảo mật dữ liệu (Data Security)</span></div>
+					</div>
+				</div>
+			</section>
+
+			<!-- NEW SECTION: SO SÁNH NGÀNH -->
+			<section class="my-16">
+				<h2 class="section-title text-3xl text-center mb-10 flex items-center justify-center gap-3">
+					<i data-lucide="orbit" class="icon"></i>
+					HTTT Giữa "Vũ Trụ" IT
+				</h2>
+				<div class="grid md:grid-cols-2 gap-8">
+					<div class="card p-6">
+						<div class="flex items-center mb-4"><i data-lucide="cpu" class="icon mr-4"></i>
+							<h4 class="text-xl font-bold text-slate-800">vs. Khoa học Máy tính</h4>
+						</div>
+						<p class="text-slate-600"><b>KHMT</b> là người phát minh ra động cơ, nghiên cứu vật liệu. <b>HTTT</b> là kỹ
+							sư thiết kế chiếc xe hoàn chỉnh, đảm bảo động cơ đó phục vụ tốt nhất cho việc di chuyển trong thành phố
+							(doanh nghiệp). KHMT tập trung vào "Tại sao?", HTTT tập trung vào "Để làm gì?".</p>
+					</div>
+					<div class="card p-6">
+						<div class="flex items-center mb-4"><i data-lucide="code" class="icon mr-4"></i>
+							<h4 class="text-xl font-bold text-slate-800">vs. Kỹ thuật Phần mềm</h4>
+						</div>
+						<p class="text-slate-600"><b>KTPM</b> là tổng thầu xây dựng, tập trung vào quy trình để xây một toà nhà
+							(phần mềm) vững chắc, đúng tiến độ. <b>HTTT</b> là kiến trúc sư quy hoạch cả khu đô thị, quyết định đặt
+							toà nhà đó ở đâu, kết nối với các công trình khác ra sao để phục vụ cư dân (doanh nghiệp) tốt nhất.</p>
+					</div>
+					<div class="card p-6">
+						<div class="flex items-center mb-4"><i data-lucide="flask-conical" class="icon mr-4"></i>
+							<h4 class="text-xl font-bold text-slate-800">vs. Khoa học Dữ liệu</h4>
+						</div>
+						<p class="text-slate-600"><b>KHDL</b> là chuyên gia khai thác mỏ, dùng công cụ tối tân để tìm ra vàng
+							(insight) từ quặng thô (dữ liệu). <b>HTTT</b> là người quản lý cả khu mỏ, từ việc xây dựng đường đi, nhà
+							kho, đến việc đảm bảo vàng được đưa đến đúng nơi cần thiết.</p>
+					</div>
+					<div class="card p-6">
+						<div class="flex items-center mb-4"><i data-lucide="network" class="icon mr-4"></i>
+							<h4 class="text-xl font-bold text-slate-800">vs. Mạng máy tính & Viễn thông</h4>
+						</div>
+						<p class="text-slate-600"><b>MMT</b> xây dựng và bảo trì hệ thống đường cao tốc, cầu cống (hạ tầng mạng).
+							<b>HTTT</b> thiết kế các luồng giao thông, đặt các trung tâm thương mại, khu dân cư (ứng dụng nghiệp vụ)
+							trên nền tảng đường cao tốc đó để đảm bảo kinh tế-xã hội (doanh nghiệp) phát triển.
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<!-- SECTION: VÍ DỤ THỰC TẾ -->
+			<section class="my-16">
+				<h2 class="section-title text-3xl text-center mb-12">Ứng dụng thực tế</h2>
+				<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+					<div class="card p-6 flex flex-col items-center text-center">
+						<i data-lucide="shopping-cart" class="icon mb-4"></i>
+						<h4 class="text-lg font-bold text-slate-800 mb-2">Sàn thương mại điện tử</h4>
+						<p class="text-slate-600 text-sm">Hệ thống đằng sau các "các công ty hàng đầu" như Amazon, Tiki, quản lý hàng triệu sản
+							phẩm, đơn hàng và gợi ý sản phẩm "chuẩn không cần chỉnh".</p>
+					</div>
+					<div class="card p-6 flex flex-col items-center text-center">
+						<i data-lucide="car" class="icon mb-4"></i>
+						<h4 class="text-lg font-bold text-slate-800 mb-2">Ứng dụng đặt xe công nghệ</h4>
+						<p class="text-slate-600 text-sm">"Bộ não" của Grab, Gojek, giúp kết nối hàng triệu tài xế và khách hàng,
+							tính toán giá cước và tối ưu quãng đường đi.</p>
+					</div>
+					<div class="card p-6 flex flex-col items-center text-center">
+						<i data-lucide="landmark" class="icon mb-4"></i>
+						<h4 class="text-lg font-bold text-slate-800 mb-2">Hệ thống ngân hàng số</h4>
+						<p class="text-slate-600 text-sm">Các ứng dụng mobile banking bạn dùng hàng ngày, quản lý hàng tỷ giao dịch,
+							đảm bảo an toàn và tiện lợi.</p>
+					</div>
+					<div class="card p-6 flex flex-col items-center text-center">
+						<i data-lucide="users" class="icon mb-4"></i>
+						<h4 class="text-lg font-bold text-slate-800 mb-2">Mạng xã hội</h4>
+						<p class="text-slate-600 text-sm">Nền tảng của Facebook, Instagram, quản lý thông tin cá nhân, bài đăng, mối
+							quan hệ và hiển thị Bảng tin (News Feed) cho bạn.</p>
+					</div>
+					<div class="card p-6 flex flex-col items-center text-center">
+						<i data-lucide="clapperboard" class="icon mb-4"></i>
+						<h4 class="text-lg font-bold text-slate-800 mb-2">Dịch vụ Streaming</h4>
+						<p class="text-slate-600 text-sm">Hệ thống của Netflix, Spotify, quản lý kho nội dung khổng lồ và đề xuất
+							phim/nhạc "theo xu hướng" đúng gu của bạn.</p>
+					</div>
+					<div class="card p-6 flex flex-col items-center text-center">
+						<i data-lucide="truck" class="icon mb-4"></i>
+						<h4 class="text-lg font-bold text-slate-800 mb-2">Quản lý chuỗi cung ứng</h4>
+						<p class="text-slate-600 text-sm">Các hệ thống phức tạp giúp các tập đoàn lớn theo dõi sản phẩm từ nhà máy
+							đến tay người tiêu dùng trên toàn cầu.</p>
+					</div>
+				</div>
+			</section>
+
+			<!-- SECTION: CƠ HỘI NGHỀ NGHIỆP "XỊN SÒ" -->
+			<section class="my-16">
+				<h2 class="section-title text-3xl text-center mb-12">Sự nghiệp "cất cánh" với các vai trò</h2>
+				<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+					<div class="card p-6 flex flex-col items-center text-center">
+						<i data-lucide="user-check" class="icon mb-4"></i>
+						<h4 class="text-lg font-bold text-slate-800 mb-2">Chuyên viên phân tích nghiệp vụ (BA)</h4>
+						<p class="text-slate-600 text-sm">"Cầu nối" giữa khách hàng và team dev, đảm bảo sản phẩm làm ra đúng ý
+							người dùng.</p>
+					</div>
+					<div class="card p-6 flex flex-col items-center text-center">
+						<i data-lucide="database-backup" class="icon mb-4"></i>
+						<h4 class="text-lg font-bold text-slate-800 mb-2">Quản trị viên CSDL (DBA)</h4>
+						<p class="text-slate-600 text-sm">"Người gác đền" cho kho dữ liệu của công ty, đảm bảo an toàn và hiệu suất.
+						</p>
+					</div>
+					<div class="card p-6 flex flex-col items-center text-center">
+						<i data-lucide="pie-chart" class="icon mb-4"></i>
+						<h4 class="text-lg font-bold text-slate-800 mb-2">Chuyên viên phân tích dữ liệu</h4>
+						<p class="text-slate-600 text-sm">"Thám tử" dữ liệu, tìm ra những sự thật ngầm hiểu để định hướng kinh
+							doanh.</p>
+					</div>
+					<div class="card p-6 flex flex-col items-center text-center">
+						<i data-lucide="server-cog" class="icon mb-4"></i>
+						<h4 class="text-lg font-bold text-slate-800 mb-2">Kỹ sư dữ liệu (Data Engineer)</h4>
+						<p class="text-slate-600 text-sm">"Kiến trúc sư" xây dựng các đường ống dữ liệu khổng lồ, đảm bảo dữ liệu
+							"chảy" mượt mà.</p>
+					</div>
+					<div class="card p-6 flex flex-col items-center text-center">
+						<i data-lucide="flask-conical" class="icon mb-4"></i>
+						<h4 class="text-lg font-bold text-slate-800 mb-2">Nhà khoa học dữ liệu (Data Scientist)</h4>
+						<p class="text-slate-600 text-sm">Sử dụng thuật toán và mô hình để dự báo tương lai và tạo ra các sản phẩm
+							thông minh.</p>
+					</div>
+					<div class="card p-6 flex flex-col items-center text-center">
+						<i data-lucide="crown" class="icon mb-4"></i>
+						<h4 class="text-lg font-bold text-slate-800 mb-2">Giám đốc thông tin (CIO)</h4>
+						<p class="text-slate-600 text-sm">Vị trí lãnh đạo, định hướng chiến lược công nghệ thông tin cho toàn bộ
+							doanh nghiệp.</p>
+					</div>
+				</div>
+			</section>
+
+			<!-- SECTION: VÌ SAO NÊN CHỌN FIT@HCMUS -->
+			<section class="my-16">
+				<h2 class="section-title text-3xl text-center mb-10">Vì Sao Nên Chọn HTTT tại <span
+						class="text-cyan-600 font-bold">fit@hcmus</span>?</h2>
+				<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+					<div class="card p-6">
+						<h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center"><i data-lucide="award"
+								class="icon mr-3 h-8 w-8"></i>Chất lượng đào tạo hàng đầu</h3>
+						<p class="text-slate-600">Là một trong những nơi đầu tiên đào tạo về HTTT tại Việt Nam (từ 1995), với chương
+							trình chất lượng và đội ngũ giảng viên giàu kinh nghiệm.</p>
+					</div>
+					<div class="card p-6">
+						<h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center"><i data-lucide="briefcase"
+								class="icon mr-3 h-8 w-8"></i>Cơ hội nghề nghiệp rộng mở</h3>
+						<p class="text-slate-600">Sinh viên tốt nghiệp luôn được các nhà tuyển dụng đánh giá cao và săn đón cho các
+							vị trí quan trọng như Phân tích nghiệp vụ, Quản trị CSDL, Khoa học dữ liệu.</p>
+					</div>
+					<div class="card p-6">
+						<h3 class="font-bold text-lg text-slate-800 mb-3 flex items-center"><i data-lucide="book-open"
+								class="icon mr-3 h-8 w-8"></i>Kiến thức toàn diện</h3>
+						<p class="text-slate-600">Chương trình học cân bằng giữa kiến thức nền tảng về công nghệ, kỹ năng phân tích
+							dữ liệu và sự am hiểu về quy trình vận hành trong doanh nghiệp.</p>
+					</div>
+				</div>
+			</section>
+		</main>
+	</div>
+
+	<script>
+		lucide.createIcons();
+	</script>
+
+
+    <script>
+        // Dynamic Image Converter for Export
+        class ExportImageConverter {
+            constructor() {
+                this.imageCache = new Map();
+                this.isExportMode = false;
+            }
+            
+            async convertImageToBase64(imgElement) {
+                const src = imgElement.getAttribute('data-original-src') || imgElement.src;
+                
+                // Skip if already converted or external URL
+                if (src.startsWith('data:') || src.startsWith('http')) {
+                    return;
+                }
+                
+                // Check cache first
+                if (this.imageCache.has(src)) {
+                    imgElement.src = this.imageCache.get(src);
+                    return;
+                }
+                
+                try {
+                    // Save original src
+                    if (!imgElement.getAttribute('data-original-src')) {
+                        imgElement.setAttribute('data-original-src', src);
+                    }
+                    
+                    // Convert to absolute URL for fetch
+                    const response = await fetch(src);
+                    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                    
+                    const blob = await response.blob();
+                    const reader = new FileReader();
+                    
+                    reader.onload = () => {
+                        const base64Data = reader.result;
+                        this.imageCache.set(src, base64Data);
+                        imgElement.src = base64Data;
+                        console.log(`✅ Converted image: ${src}`);
+                    };
+                    
+                    reader.readAsDataURL(blob);
+                } catch (error) {
+                    console.warn(`⚠️ Failed to convert image: ${src}`, error);
+                }
+            }
+            
+            async enableExportMode() {
+                if (this.isExportMode) return;
+                
+                this.isExportMode = true;
+                document.body.classList.add('export-mode');
+                
+                console.log('🔄 Converting images for export...');
+                
+                const images = document.querySelectorAll('img');
+                const conversions = Array.from(images).map(img => this.convertImageToBase64(img));
+                
+                await Promise.all(conversions);
+                console.log('✅ All images converted for export');
+                
+                // Trigger icon re-creation
+                if (typeof lucide !== 'undefined' && lucide.createIcons) {
+                    lucide.createIcons();
+                }
+            }
+            
+            disableExportMode() {
+                if (!this.isExportMode) return;
+                
+                this.isExportMode = false;
+                document.body.classList.remove('export-mode');
+                
+                // Restore original images
+                const images = document.querySelectorAll('img[data-original-src]');
+                images.forEach(img => {
+                    img.src = img.getAttribute('data-original-src');
+                });
+                
+                console.log('✅ Export mode disabled, images restored');
+            }
+        }
+        
+        // Global instance
+        window.exportConverter = new ExportImageConverter();
+        
+        // Auto-enable export mode detection
+        function detectExportMode() {
+            // Check for common export tool indicators
+            const indicators = [
+                () => window.location.search.includes('export'),
+                () => window.location.hash.includes('export'),
+                () => document.body.classList.contains('export-mode'),
+                () => window.navigator.webdriver, // Selenium
+                () => window.puppeteer, // Puppeteer
+                () => window.phantom, // PhantomJS
+                () => window.__nightmare, // Nightmare
+                () => window.callPhantom, // PhantomJS
+                () => document.documentElement.getAttribute('data-export') === 'true'
+            ];
+            
+            return indicators.some(check => {
+                try { return check(); } catch(e) { return false; }
+            });
+        }
+        
+        // Export control functions
+        window.enableExportMode = () => window.exportConverter.enableExportMode();
+        window.disableExportMode = () => window.exportConverter.disableExportMode();
+        
+        // Auto-detection on load
+        document.addEventListener('DOMContentLoaded', () => {
+            if (detectExportMode()) {
+                console.log('🎯 Export mode detected, enabling...');
+                window.exportConverter.enableExportMode();
+            }
+        });
+        
+        // Manual trigger via console or URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('mode') === 'export') {
+            window.addEventListener('load', () => {
+                window.exportConverter.enableExportMode();
+            });
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Thông Tin Chung - Khoa Công nghệ Thông tin, Trường ĐH KHTN</title>
+	<script src="https://cdn.tailwindcss.com"></script>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;900&display=swap"
+		rel="stylesheet">
+	<script src="https://unpkg.com/lucide@latest"></script>
+	<style>
+		body {
+			font-family: 'Be Vietnam Pro', sans-serif;
+			background-color: #F8FAFC;
+			/* Slate-50 */
+			color: #1E293B;
+			/* Slate-800 */
+		}
+
+		.section-title {
+			font-weight: 900;
+			color: #111B88;
+			/* Primary Color */
+			letter-spacing: 1px;
+		}
+
+		.card {
+			background-color: #FFFFFF;
+			border: 1px solid #E2E8F0;
+			/* Slate-200 */
+			transition: all 0.3s ease;
+			box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+			border-radius: 0.75rem;
+		}
+
+		.card:hover {
+			transform: translateY(-5px);
+			border-color: #312E81;
+			/* Indigo-900 */
+			box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+		}
+
+		.icon {
+			color: #111B88;
+			width: 48px;
+			height: 48px;
+		}
+
+		.cta-section {
+			background: linear-gradient(135deg, #EEF2FF 0%, #E0E7FF 50%, #C7D2FE 100%);
+			/* Indigo gradient */
+			color: #1E293B;
+			border: 1px solid #C7D2FE;
+		}
+
+		.chart-label {
+			font-size: 10px;
+			fill: #111B88;
+			font-weight: bold;
+			text-anchor: middle;
+		}
+
+		.special-title-font {
+			font-family: 'Be Vietnam Pro', sans-serif;
+			font-weight: 900;
+		}
+
+		.fit-hcmus-branding {
+			text-transform: lowercase;
+			color: #111B88 !important;
+			font-family: 'Be Vietnam Pro', sans-serif;
+			font-weight: 900;
+			display: inline-block;
+			white-space: nowrap;
+		}
+
+		.branding-font {
+			font-family: 'Be Vietnam Pro', sans-serif;
+			font-weight: 900;
+		}
+
+		.line-chart-legend span {
+			display: inline-block;
+			width: 12px;
+			height: 12px;
+			margin-right: 8px;
+			border-radius: 50%;
+		}
+
+		/* Export Mode CSS - Center align page content */
+		.export-mode #infographic-content {
+			width: 1096px !important;
+			max-width: none !important;
+			margin: 0 auto !important;
+			padding: 20px !important;
+			background: white !important;
+			display: block !important;
+		}
+
+		.export-mode .header-bg {
+			padding: 60px 24px !important;
+			margin: 0 auto 32px auto !important;
+			text-align: center !important;
+		}
+
+		.export-mode .header-content {
+			text-align: center !important;
+			margin: 0 auto !important;
+		}
+
+		.export-mode .header-content h1 {
+			font-size: 2.75rem !important;
+			text-align: center !important;
+		}
+
+		/* Export Mode - Fixed Image Dimensions */
+		.export-mode img {
+			max-width: 100% !important;
+			height: auto !important;
+			object-fit: contain !important;
+			object-position: center !important;
+			background-color: transparent !important;
+			display: block !important;
+			margin: 0 auto !important;
+			border: none !important;
+			box-shadow: none !important;
+		}
+
+		/* Standard image containers in export mode */
+		.export-mode .card img {
+			width: 100% !important;
+			height: 250px !important;
+			object-fit: contain !important;
+			object-position: center !important;
+			border-radius: 0.5rem !important;
+			background-color: rgba(248, 250, 252, 0.5) !important;
+		}
+
+		/* Overflow hidden containers - prevent image distortion */
+		.export-mode .card.overflow-hidden {
+			overflow: visible !important;
+		}
+
+		.export-mode .card.overflow-hidden img {
+			height: 300px !important;
+			object-fit: contain !important;
+			object-position: center !important;
+		}
+
+		/* Specific fixes for placeholder images with different aspect ratios */
+		.export-mode img[src*="placehold.co"] {
+			background-color: rgba(248, 250, 252, 0.8) !important;
+			border: 1px solid rgba(226, 232, 240, 0.5) !important;
+		}
+
+		/* Wide images (3:2 aspect ratio like 600x400) */
+		.export-mode img[src*="600x400"] {
+			width: 100% !important;
+			height: 200px !important;
+			max-height: 200px !important;
+		}
+
+		/* Square-ish images (4:3 aspect ratio like 800x600) */
+		.export-mode img[src*="800x600"] {
+			width: 100% !important;
+			height: 240px !important;
+			max-height: 240px !important;
+		}
+
+		/* Tall images (4:5 aspect ratio like 800x1000) */
+		.export-mode img[src*="800x1000"] {
+			width: 100% !important;
+			height: 300px !important;
+			max-height: 300px !important;
+		}
+
+		/* Force consistent sizing regardless of source dimensions */
+		.export-mode .grid img,
+		.export-mode .space-y-6 img,
+		.export-mode .items-center img {
+			object-fit: contain !important;
+			object-position: center !important;
+			background-color: rgba(248, 250, 252, 0.3) !important;
+		}
+
+		.export-mode .grid {
+			gap: 20px !important;
+			margin: 0 auto !important;
+		}
+
+		.export-mode main {
+			padding: 20px !important;
+			margin: 0 auto !important;
+		}
+
+		.export-mode section {
+			margin: 32px auto !important;
+		}
+
+		.export-mode .section-title {
+			text-align: center !important;
+			margin: 0 auto 24px auto !important;
+		}
+
+		/* Enhanced text shadow for better visibility */
+		.export-mode .header-content h1,
+		.export-mode .header-content p {
+			text-shadow: 0 4px 8px rgba(0, 0, 0, 0.7), 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+		}
+
+		.export-mode .header-content h1 {
+			color: #FFFFFF !important;
+			text-shadow: 0 4px 12px rgba(0, 0, 0, 0.8), 0 2px 6px rgba(0, 0, 0, 0.6) !important;
+			filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3)) !important;
+		}
+
+		
+		/* Enhanced Lucide icons visibility in export mode */
+		.export-mode .icon {
+			display: inline-block !important;
+			stroke-width: 2 !important;
+			font-size: 48px !important;
+			line-height: 1 !important;
+		}
+
+		.export-mode .icon svg {
+			width: 100% !important;
+			height: 100% !important;
+			stroke: currentColor !important;
+			fill: none !important;
+			stroke-linecap: round !important;
+			stroke-linejoin: round !important;
+		}
+
+		/* Force Lucide icons to be visible */
+		.export-mode [data-lucide] {
+			display: inline-block !important;
+			visibility: visible !important;
+			opacity: 1 !important;
+		}
+
+		.export-mode [data-lucide] svg {
+			display: block !important;
+			visibility: visible !important;
+			opacity: 1 !important;
+		}
+
+		/* Enhanced responsive design - Does not affect export PNG */
+		@media (max-width: 1024px) {
+			body:not(.export-mode) #infographic-content {
+				padding: 1rem !important;
+			}
+
+			body:not(.export-mode) .header-bg {
+				padding: 3rem 1rem !important;
+			}
+
+			body:not(.export-mode) .header-content h1 {
+				font-size: 2rem !important;
+				line-height: 1.2 !important;
+			}
+
+			body:not(.export-mode) .major {
+				font-size: 2rem !important;
+			}
+
+			body:not(.export-mode) .english {
+				font-size: 1.25rem !important;
+			}
+
+			body:not(.export-mode) .major-slogan {
+				font-size: 1.25rem !important;
+			}
+
+			body:not(.export-mode) .grid {
+				grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+				gap: 1rem !important;
+			}
+
+			body:not(.export-mode) .section-title {
+				font-size: 1.75rem !important;
+			}
+
+			body:not(.export-mode) main {
+				padding: 1rem !important;
+			}
+
+			body:not(.export-mode) section {
+				margin: 2rem 0 !important;
+			}
+		}
+
+		@media (max-width: 768px) {
+			body:not(.export-mode) .header-bg {
+				padding: 2rem 0.75rem !important;
+			}
+
+			body:not(.export-mode) .header-content h1 {
+				font-size: 1.5rem !important;
+			}
+
+			body:not(.export-mode) .major {
+				font-size: 1.5rem !important;
+			}
+
+			body:not(.export-mode) .english {
+				font-size: 1rem !important;
+			}
+
+			body:not(.export-mode) .major-slogan {
+				font-size: 1rem !important;
+			}
+
+			body:not(.export-mode) .faculty-slogan {
+				font-size: 1rem !important;
+			}
+
+			body:not(.export-mode) .grid {
+				grid-template-columns: 1fr !important;
+				gap: 0.75rem !important;
+			}
+
+			body:not(.export-mode) .section-title {
+				font-size: 1.5rem !important;
+			}
+
+			body:not(.export-mode) .card {
+				padding: 1rem !important;
+			}
+
+			body:not(.export-mode) .card h3 {
+				font-size: 1.125rem !important;
+			}
+
+			body:not(.export-mode) .card p {
+				font-size: 0.875rem !important;
+			}
+		}
+
+		@media (max-width: 640px) {
+			body:not(.export-mode) #infographic-content {
+				padding: 0.5rem !important;
+			}
+
+			body:not(.export-mode) .header-bg {
+				padding: 1.5rem 0.5rem !important;
+			}
+
+			body:not(.export-mode) .header-content h1 {
+				font-size: 1.25rem !important;
+			}
+
+			body:not(.export-mode) .major {
+				font-size: 1.25rem !important;
+			}
+
+			body:not(.export-mode) .english {
+				font-size: 0.875rem !important;
+			}
+
+			body:not(.export-mode) .major-slogan {
+				font-size: 0.875rem !important;
+			}
+
+			body:not(.export-mode) .faculty {
+				font-size: 0.75rem !important;
+			}
+
+			body:not(.export-mode) .faculty-slogan {
+				font-size: 0.875rem !important;
+			}
+
+			body:not(.export-mode) .section-title {
+				font-size: 1.25rem !important;
+			}
+
+			body:not(.export-mode) main {
+				padding: 0.75rem !important;
+			}
+
+			body:not(.export-mode) section {
+				margin: 1.5rem 0 !important;
+			}
+
+			body:not(.export-mode) .card {
+				padding: 0.75rem !important;
+			}
+
+			body:not(.export-mode) .card h3 {
+				font-size: 1rem !important;
+			}
+
+			body:not(.export-mode) .card p {
+				font-size: 0.8rem !important;
+			}
+
+			body:not(.export-mode) .icon {
+				width: 32px !important;
+				height: 32px !important;
+			}
+		}
+	</style>
+</head>
+
+<body class="antialiased">
+
+
+	<div class="max-w-5xl mx-auto bg-white" id="infographic-content">
+		<main class="p-4 md:p-8">
+			<!-- PHẦN 5: VÌ SAO CHỌN FIT@HCMUS -->
+			<section class="my-16">
+				<h2 class="section-title text-3xl text-center mb-10 special-title-font">Vì sao chọn <span
+						class="fit-hcmus-branding">fit@hcmus</span>?</h2>
+				<p class="text-center text-lg text-slate-700 mb-12 max-w-3xl mx-auto">
+					Gia nhập Khoa CNTT KHTN không chỉ là học lập trình, mà là cùng nhau xây dựng tương lai. Đây là nơi những tài
+					năng trẻ hội tụ để biến những ý tưởng sáng tạo nhất thành hiện thực!
+				</p>
+				<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+					<!-- Card 1 -->
+					<div class="card p-6">
+						<h3 class="font-bold text-lg text-slate-800 mb-3">Môi trường đào tạo chất lượng cao</h3>
+						<ul class="space-y-3 text-slate-600">
+							<li class="flex items-start"><i data-lucide="award"
+									class="text-amber-500 mr-3 mt-1 flex-shrink-0"></i><span>Chất lượng đào tạo top đầu, chuẩn quốc
+									tế.</span></li>
+							<li class="flex items-start"><i data-lucide="users"
+									class="text-blue-500 mr-3 mt-1 flex-shrink-0"></i><span>Đội ngũ giảng viên chuyên nghiệp, giàu kinh
+									nghiệm, luôn sẵn sàng hướng dẫn và truyền đạt kiến thức.</span></li>
+							<li class="flex items-start"><i data-lucide="bar-chart-2"
+									class="text-green-500 mr-3 mt-1 flex-shrink-0"></i><span>Điểm chuẩn luôn ở top cao, tạo nên môi trường
+									học tập cạnh tranh và đầy thử thách.</span></li>
+							<li class="flex items-start"><i data-lucide="trophy"
+									class="text-yellow-500 mr-3 mt-1 flex-shrink-0"></i><span>10 lần tham dự ICPC World Finals, với chuỗi
+									6 năm liên tiếp gần đây (2020-2025), thể hiện sự nỗ lực bền bỉ và thành tích ấn tượng.</span></li>
+						</ul>
+					</div>
+					<!-- Card 2 -->
+					<div class="card p-6">
+						<h3 class="font-bold text-lg text-slate-800 mb-3">Cơ hội phát triển toàn diện</h3>
+						<ul class="space-y-3 text-slate-600">
+							<li class="flex items-start"><i data-lucide="rocket"
+									class="text-green-500 mr-3 mt-1 flex-shrink-0"></i><span>Tiếp cận sớm các dự án nghiên cứu "tiên tiến"
+									cùng chuyên gia đầu ngành.</span></li>
+							<li class="flex items-start"><i data-lucide="briefcase"
+									class="text-purple-500 mr-3 mt-1 flex-shrink-0"></i><span>Mạng lưới đối tác doanh nghiệp lớn mạnh,
+									mang lại nhiều cơ hội thực tập và việc làm.</span></li>
+							<li class="flex items-start"><i data-lucide="globe"
+									class="text-cyan-500 mr-3 mt-1 flex-shrink-0"></i><span>Cơ hội du học, trao đổi sinh viên với các
+									trường top thế giới.</span></li>
+						</ul>
+					</div>
+					<!-- Card 3 -->
+					<div class="card p-6">
+						<h3 class="font-bold text-lg text-slate-800 mb-3">Nền tảng giáo dục vững chắc</h3>
+						<ul class="space-y-3 text-slate-600">
+							<li class="flex items-start"><i data-lucide="gem"
+									class="text-cyan-500 mr-3 mt-1 flex-shrink-0"></i><span>Sở hữu Chương trình Tiên tiến ngành Khoa học
+									Máy tính duy nhất trên cả nước.</span></li>
+							<li class="flex items-start"><i data-lucide="cpu"
+									class="text-slate-500 mr-3 mt-1 flex-shrink-0"></i><span>Chương trình học luôn cập nhật, bám sát
+									"xu hướng" công nghệ mới nhất.</span></li>
+							<li class="flex items-start"><i data-lucide="flask-conical"
+									class="text-orange-500 mr-3 mt-1 flex-shrink-0"></i><span>Cơ sở vật chất, phòng thí nghiệm hiện đại,
+									không lo "lỗi thời".</span></li>
+							<li class="flex items-start"><i data-lucide="graduation-cap"
+									class="text-indigo-500 mr-3 mt-1 flex-shrink-0"></i><span>Bằng cấp uy tín, được các doanh nghiệp lớn
+									trong và ngoài nước đánh giá cao.</span></li>
+						</ul>
+					</div>
+				</div>
+			</section>
+
+			<!-- NEW SECTION: HỌC BỔNG -->
+			<section class="my-16">
+				<h2 class="section-title text-3xl text-center mb-10">Học bổng và hỗ trợ tài chính</h2>
+				<div class="bg-white p-8 rounded-lg card">
+					<div class="grid md:grid-cols-3 gap-8">
+						<div class="md:col-span-2 space-y-6">
+							<div class="flex items-start">
+								<div class="flex-shrink-0 h-12 w-12 rounded-full bg-indigo-50 flex items-center justify-center mr-4">
+									<i data-lucide="star" class="text-indigo-600"></i>
+								</div>
+								<div>
+									<h4 class="font-bold text-lg text-slate-800">Học bổng "giá trị cao" cho tân sinh viên</h4>
+									<p class="text-slate-600">Dành cho các "tân sinh viên" có thành tích xuất sắc, bao gồm học bổng toàn
+										phần
+										và từng năm.</p>
+								</div>
+							</div>
+							<div class="flex items-start">
+								<div class="flex-shrink-0 h-12 w-12 rounded-full bg-indigo-50 flex items-center justify-center mr-4">
+									<i data-lucide="xu hướnging-up" class="text-indigo-600"></i>
+								</div>
+								<div>
+									<h4 class="font-bold text-lg text-slate-800">Học bổng khuyến khích học tập</h4>
+									<p class="text-slate-600">Trao tặng hàng kỳ cho các sinh viên xuất sắc có kết quả học tập và rèn luyện
+										tốt.
+									</p>
+								</div>
+							</div>
+							<div class="flex items-start">
+								<div class="flex-shrink-0 h-12 w-12 rounded-full bg-indigo-50 flex items-center justify-center mr-4">
+									<i data-lucide="briefcase" class="text-indigo-600"></i>
+								</div>
+								<div>
+									<h4 class="font-bold text-lg text-slate-800">Học bổng từ doanh nghiệp đối tác</h4>
+									<p class="text-slate-600">Cơ hội nhận tài trợ từ các "doanh nghiệp hàng đầu" công nghệ trong và ngoài
+										nước.</p>
+								</div>
+							</div>
+						</div>
+						<div
+							class="flex flex-col items-center justify-center text-center border-t md:border-t-0 md:border-l border-slate-200 pt-6 md:pt-0 md:pl-8">
+							<h4 class="text-lg font-bold text-slate-800 mb-4">Quét QR để xem chi tiết</h4>
+							<img
+								src="https://api.qrserver.com/v1/create-qr-lập trình/?size=200x200&data=https://www.fit.hcmus.edu.vn/tuyen-sinh/hoc-bong"
+								alt="Mã QR dẫn đến trang thông tin học bổng của Khoa Công nghệ thông tin, trường Đại học Khoa học Tự nhiên. Tỉ lệ khung hình 1:1."
+								class="w-40 h-40 rounded-lg">
+							<a href="https://www.fit.hcmus.edu.vn/tuyen-sinh/hoc-bong" target="_blank"
+								class="text-indigo-600 hover:underline mt-2 text-sm">fit.hcmus.edu.vn/tuyen-sinh/hoc-bong</a>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- PHẦN 6: THÔNG TIN TUYỂN SINH -->
+			<section class="my-16">
+				<h2 class="section-title text-3xl text-center mb-10">Hướng dẫn tuyển sinh <span
+						class="fit-hcmus-branding">fit@hcmus</span>?</h2>
+				<div class="grid lg:grid-cols-5 gap-8">
+					<!-- Left Column: Info -->
+					<div class="lg:col-span-2 card p-6">
+						<h3 class="text-xl font-bold text-slate-800 mb-4">Các ngành đào tạo "hot"</h3>
+						<div class="overflow-x-auto mb-6">
+							<table class="w-full text-left text-sm">
+								<thead class="text-xs text-indigo-800 uppercase bg-indigo-50">
+									<tr>
+										<th scope="col" class="px-4 py-3">Ngành Học</th>
+										<th scope="col" class="px-4 py-3">Mã Ngành</th>
+									</tr>
+								</thead>
+								<tbody class="text-slate-700">
+									<tr class="border-b border-slate-200">
+										<td class="px-4 py-3 font-medium">Khoa học máy tính (Chương trình Tiên tiến)</td>
+										<td class="px-4 py-3">7480101_TT</td>
+									</tr>
+									<tr class="border-b border-slate-200">
+										<td class="px-4 py-3 font-medium">Trí tuệ nhân tạo (Chương trình Chuẩn)</td>
+										<td class="px-4 py-3">7480107</td>
+									</tr>
+									<tr class="border-b border-slate-200">
+										<td class="px-4 py-3 font-medium">CNTT (Tăng cường tiếng Anh)</td>
+										<td class="px-4 py-3">7480201_DKD</td>
+									</tr>
+									<tr>
+										<td class="px-4 py-3 font-medium">Nhóm ngành Máy tính và CNTT</td>
+										<td class="px-4 py-3">7480201_NN</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<h3 class="text-xl font-bold text-slate-800 mt-6 mb-4">Phương thức xét tuyển</h3>
+						<div class="space-y-4 text-slate-600">
+							<div class="flex items-start">
+								<i data-lucide="award" class="text-indigo-500 mr-3 mt-1 h-5 w-5 flex-shrink-0"></i>
+								<span>Tuyển thẳng, ưu tiên xét tuyển cho thí sinh có thành tích xuất sắc theo quy chế của Bộ GD&ĐT và
+									ĐHQG-HCM.</span>
+							</div>
+							<div class="flex items-start">
+								<i data-lucide="file-text" class="text-indigo-500 mr-3 mt-1 h-5 w-5 flex-shrink-0"></i>
+								<span>Xét tuyển dựa trên kết quả các kỳ thi "đánh giá năng lực" (THPT, ĐGNL).</span>
+							</div>
+							<div class="flex items-start">
+								<i data-lucide="book-copy" class="text-indigo-500 mr-3 mt-1 h-5 w-5 flex-shrink-0"></i>
+								<span>Kết hợp điểm học bạ THPT và các chứng chỉ, giải thưởng quốc tế uy tín.</span>
+							</div>
+						</div>
+					</div>
+					<!-- Right Column: Charts -->
+					<div class="lg:col-span-3 space-y-8">
+						<!-- THPT Chart -->
+						<div class="card p-6">
+							<h3 class="text-lg font-bold text-slate-800 mb-4">Điểm chuẩn THPTQG các năm gần đây</h3>
+							<div class="relative h-64">
+								<svg class="w-full h-full" viewBox="0 0 500 200" preserveAspectRatio="xMidYMid meet">
+									<g class="text-slate-500 text-xs">
+										<line x1="40" y1="20" x2="460" y2="20" stroke="currentColor" stroke-width="0.5" />
+										<text x="15" y="25" fill="currentColor">29</text>
+										<line x1="40" y1="95" x2="460" y2="95" stroke="currentColor" stroke-width="0.5" />
+										<text x="15" y="100" fill="currentColor">27</text>
+										<line x1="40" y1="170" x2="460" y2="170" stroke="currentColor" stroke-width="0.5" />
+										<text x="15" y="175" fill="currentColor">25</text>
+										<text x="100" y="195" text-anchor="middle" fill="currentColor">2022</text>
+										<text x="275" y="195" text-anchor="middle" fill="currentColor">2023</text>
+										<text x="425" y="195" text-anchor="middle" fill="currentColor">2024</text>
+									</g>
+									<!-- Data points mapped to a 25-29 scale -->
+									<!-- KHMT (TT): 28.2, 28.05, 28.5 -->
+									<polyline fill="none" stroke="#111B88" stroke-width="2" points="100,50 275,55.625 425,38.75" />
+									<circle cx="100" cy="50" r="3" fill="#111B88" />
+									<text x="100" y="45" class="chart-label">28.2</text>
+									<circle cx="275" cy="55.625" r="3" fill="#111B88" />
+									<text x="275" y="50.625" class="chart-label">28.05</text>
+									<circle cx="425" cy="38.75" r="3" fill="#111B88" />
+									<text x="425" y="33.75" class="chart-label">28.5</text>
+									<!-- AI: null, 27.0, 27.7 -->
+									<polyline fill="none" stroke="#22C55E" stroke-width="2" points="275,95 425,68.75" />
+									<circle cx="275" cy="95" r="3" fill="#22C55E" />
+									<text x="275" y="90" class="chart-label">27.0</text>
+									<circle cx="425" cy="68.75" r="3" fill="#22C55E" />
+									<text x="425" y="63.75" class="chart-label">27.7</text>
+									<!-- CNTT (TCTA): 27.2, 26, 26 -->
+									<polyline fill="none" stroke="#F97316" stroke-width="2" points="100,87.5 275,132.5 425,132.5" />
+									<circle cx="100" cy="87.5" r="3" fill="#F97316" />
+									<text x="100" y="82.5" class="chart-label">27.2</text>
+									<circle cx="275" cy="132.5" r="3" fill="#F97316" />
+									<text x="275" y="145.5" class="chart-label">26.0</text>
+									<circle cx="425" cy="132.5" r="3" fill="#F97316" />
+									<text x="425" y="145.5" class="chart-label">26.0</text>
+									<!-- Nhóm ngành (NN): 27.2, 26.5, 26.75 -->
+									<polyline fill="none" stroke="#4F46E5" stroke-width="2" points="100,87.5 275,113.75 425,104.375" />
+									<circle cx="100" cy="87.5" r="3" fill="#4F46E5" />
+									<text x="100" y="102.5" class="chart-label">27.2</text>
+									<circle cx="275" cy="113.75" r="3" fill="#4F46E5" />
+									<text x="275" y="121.75" class="chart-label">26.5</text>
+									<circle cx="425" cy="104.375" r="3" fill="#4F46E5" />
+									<text x="425" y="99.375" class="chart-label">26.75</text>
+								</svg>
+							</div>
+							<div class="flex flex-wrap justify-center gap-x-4 gap-y-2 mt-4 text-xs text-slate-600 line-chart-legend">
+								<div class="flex items-center"><span style="background-color: #111B88;"></span>KHMT(TT)
+								</div>
+								<div class="flex items-center"><span style="background-color: #22C55E;"></span>TTNT
+								</div>
+								<div class="flex items-center"><span style="background-color: #F97316;"></span>CNTT(TCTA)</div>
+								<div class="flex items-center"><span style="background-color: #4F46E5;"></span>Nhóm
+									ngành</div>
+							</div>
+						</div>
+						<!-- DGNL Chart -->
+						<div class="card p-6">
+							<h3 class="text-lg font-bold text-slate-800 mb-4">Điểm chuẩn ĐGNL các năm gần đây</h3>
+							<div class="relative h-64">
+								<svg class="w-full h-full" viewBox="0 0 500 200" preserveAspectRatio="xMidYMid meet">
+									<g class="text-slate-500 text-xs">
+										<line x1="40" y1="20" x2="460" y2="20" stroke="currentColor" stroke-width="0.5" />
+										<text x="0" y="25" fill="currentColor">1100</text>
+										<line x1="40" y1="95" x2="460" y2="95" stroke="currentColor" stroke-width="0.5" />
+										<text x="10" y="100" fill="currentColor">975</text>
+										<line x1="40" y1="170" x2="460" y2="170" stroke="currentColor" stroke-width="0.5" />
+										<text x="10" y="175" fill="currentColor">850</text>
+										<text x="100" y="195" text-anchor="middle" fill="currentColor">2022</text>
+										<text x="275" y="195" text-anchor="middle" fill="currentColor">2023</text>
+										<text x="425" y="195" text-anchor="middle" fill="currentColor">2024</text>
+									</g>
+									<!-- Data points mapped to a 850-1100 scale -->
+									<!-- KHMT (TT): 1001, 1035, 1052 -->
+									<polyline fill="none" stroke="#111B88" stroke-width="2" points="100,79.4 275,59 425,48.8" />
+									<circle cx="100" cy="79.4" r="3" fill="#111B88" />
+									<text x="100" y="74.4" class="chart-label">1001</text>
+									<circle cx="275" cy="59" r="3" fill="#111B88" />
+									<text x="275" y="54" class="chart-label">1035</text>
+									<circle cx="425" cy="48.8" r="3" fill="#111B88" />
+									<text x="425" y="43.8" class="chart-label">1052</text>
+									<!-- AI: null, 1001, 1032 -->
+									<polyline fill="none" stroke="#22C55E" stroke-width="2" points="275,79.4 425,60.8" />
+									<circle cx="275" cy="79.4" r="3" fill="#22C55E" />
+									<text x="275" y="74.4" class="chart-label">1001</text>
+									<circle cx="425" cy="60.8" r="3" fill="#22C55E" />
+									<text x="425" y="75.8" class="chart-label">1032</text>
+									<!-- CNTT (TCTA): 880, 925, 925 -->
+									<polyline fill="none" stroke="#F97316" stroke-width="2" points="100,152 275,125 425,125" />
+									<circle cx="100" cy="152" r="3" fill="#F97316" />
+									<text x="100" y="147" class="chart-label">880</text>
+									<circle cx="275" cy="125" r="3" fill="#F97316" />
+									<text x="275" y="120" class="chart-label">925</text>
+									<circle cx="425" cy="125" r="3" fill="#F97316" />
+									<text x="425" y="140" class="chart-label">925</text>
+									<!-- Nhóm ngành (NN): 935, 940, 945 -->
+									<polyline fill="none" stroke="#4F46E5" stroke-width="2" points="100,119 275,116 425,113" />
+									<circle cx="100" cy="119" r="3" fill="#4F46E5" />
+									<text x="100" y="114" class="chart-label">935</text>
+									<circle cx="275" cy="116" r="3" fill="#4F46E5" />
+									<text x="275" y="131" class="chart-label">940</text>
+									<circle cx="425" cy="113" r="3" fill="#4F46E5" />
+									<text x="425" y="108" class="chart-label">945</text>
+								</svg>
+							</div>
+							<div class="flex flex-wrap justify-center gap-x-4 gap-y-2 mt-4 text-xs text-slate-600 line-chart-legend">
+								<div class="flex items-center"><span style="background-color: #111B88;"></span>KHMT(TT)
+								</div>
+								<div class="flex items-center"><span style="background-color: #22C55E;"></span>TTNT
+								</div>
+								<div class="flex items-center"><span style="background-color: #F97316;"></span>CNTT(TCTA)</div>
+								<div class="flex items-center"><span style="background-color: #4F46E5;"></span>Nhóm
+									ngành</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- PHẦN 7: KÊU GỌI HÀNH ĐỘNG -->
+			<section class="my-16 cta-section text-center p-10 rounded-lg">
+				<h2 class="text-2xl md:text-3xl font-bold mb-4 text-slate-800">Sẵn sàng "lập trình" nên tương lai của bạn và thế
+					giới?</h2>
+				<p class="text-lg mb-8 text-slate-700 branding-font">Gia nhập cộng đồng sinh viên <span
+						class="fit-hcmus-branding">fit@hcmus</span> ngay hôm nay!</p>
+				<div class="flex flex-col md:flex-row items-center justify-center gap-8">
+					<!-- QR Codes -->
+					<div class="flex flex-wrap justify-center items-start gap-6 text-center">
+						<div class="flex flex-col items-center">
+							<img src="imgs/qr_web.png"
+								alt="Mã QR dẫn đến website chính thức của Khoa Công nghệ thông tin, trường Đại học Khoa học Tự nhiên. Tỉ lệ khung hình 1:1."
+								class="w-28 h-28 rounded-lg border-4 border-slate-300">
+							<p class="mt-2 text-xs font-semibold text-slate-700">Website<br><a href="http://www.fit.hcmus.edu.vn"
+									target="_blank" class="text-indigo-600 hover:underline">www.fit.hcmus.edu.vn</a></p>
+						</div>
+						<div class="flex flex-col items-center">
+							<img src="imgs/qr_web.png"
+								alt="Mã QR dẫn đến fanpage Tư vấn tuyển sinh của Khoa Công nghệ thông tin, trường Đại học Khoa học Tự nhiên. Tỉ lệ khung hình 1:1."
+								class="w-28 h-28 rounded-lg border-4 border-slate-300">
+							<p class="mt-2 text-xs font-semibold text-slate-700">Fanpage<br><a href="http://fb.com/fit.hcmus"
+									target="_blank" class="text-indigo-600 hover:underline">fb.com/fit.hcmus</a></p>
+						</div>
+						<div class="flex flex-col items-center">
+							<img src="imgs/qr_zalo.png"
+								alt="Mã QR dẫn đến trang thông tin tuyển sinh chi tiết của Khoa Công nghệ thông tin, trường Đại học Khoa học Tự nhiên. Tỉ lệ khung hình 1:1."
+								class="w-28 h-28 rounded-lg border-4 border-slate-300">
+							<p class="mt-2 text-xs font-semibold text-slate-700">Thông tin tuyển sinh</p>
+						</div>
+					</div>
+				</div>
+				<div class="mt-8 text-xs text-slate-600">
+					<p>Email: tuyensinh@fit.hcmus.edu.vn | Hotline "tư vấn": 093773 4004</p>
+				</div>
+			</section>
+		</main>
+	</div>
+
+	<script>
+		lucide.createIcons();
+	</script>
+</body>
+
+</html>
