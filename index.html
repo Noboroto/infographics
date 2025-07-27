@@ -42,6 +42,7 @@
 			backdrop-filter: blur(10px);
 			border-radius: 1rem;
 			box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 10px 10px -5px rgb(0 0 0 / 0.04);
+			margin-bottom: 2px;
 		}
 
 		.content-container {
@@ -51,6 +52,7 @@
 			box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 10px 10px -5px rgb(0 0 0 / 0.04);
 			max-height: calc(100vh - 2rem);
 			overflow: hidden;
+			margin-bottom: 2px;
 		}
 
 		.menu-item {
@@ -59,6 +61,7 @@
 			transition: all 0.3s ease;
 			border-radius: 1rem;
 			cursor: pointer;
+			margin-bottom: 2px;
 		}
 
 		.menu-item:hover {
@@ -263,6 +266,7 @@
 			-webkit-appearance: none;
 			-moz-appearance: none;
 			min-height: 44px;
+			margin-bottom: 2px;
 		}
 
 		.mobile-select:focus {
@@ -380,10 +384,12 @@
 		@media (max-width: 768px) {
 			body:not(.export-mode) .main-container {
 				padding: 1rem !important;
+				margin-bottom: 2px !important;
 			}
 
 			body:not(.export-mode) .content-container {
 				padding: 1rem !important;
+				margin-bottom: 2px !important;
 			}
 		}
 
@@ -446,6 +452,7 @@
 
 			body:not(.export-mode) .menu-item {
 				padding: 0.75rem !important;
+				margin-bottom: 2px !important;
 			}
 
 			body:not(.export-mode) .header-section {
@@ -492,70 +499,66 @@
 			body:not(.export-mode) .container .grid>div:first-child {
 				display: none !important;
 			}
+		}
 
-			/* iPhone SE and small mobile devices specific fixes */
-			@media (max-width: 480px) {
-				body {
-					background: linear-gradient(180deg, #667eea 0%, #667eea 100px, #764ba2 100%);
-				}
-
-				.mobile-top-header {
-					display: block !important;
-					background: linear-gradient(180deg, #667eea 0%, #667eea 100%);
-				}
+		/* iPhone SE and small mobile devices specific fixes */
+		@media (max-width: 480px) {
+			body {
+				background: linear-gradient(180deg, #667eea 0%, #667eea 100px, #764ba2 100%);
 			}
 
-			/* iPhone SE and small mobile devices specific fixes */
-			@media (max-width: 480px) {
-				.mobile-top-header {
-					display: block !important;
-				}
-
-				.mobile-header-content {
-					padding: 0.75rem !important;
-				}
-
-				.mobile-header-title {
-					font-size: 1rem !important;
-					margin-bottom: 0.5rem !important;
-				}
-
-				.mobile-select-container {
-					display: block !important;
-					visibility: visible !important;
-					opacity: 1 !important;
-					z-index: 10 !important;
-				}
-
-				.mobile-select {
-					padding: 0.75rem !important;
-					font-size: 0.9rem !important;
-					min-height: 44px !important;
-					-webkit-appearance: none !important;
-					appearance: none !important;
-				}
-
-				body {
-					padding-top: 100px !important;
-				}
-
-				body:not(.export-mode) .container {
-					padding: 0.5rem !important;
-				}
-
-				body:not(.export-mode) .container .grid {
-					grid-template-columns: 1fr !important;
-					gap: 0.75rem !important;
-				}
-
-				body:not(.export-mode) .container .grid>div:first-child {
-					display: none !important;
-				}
-
-				body:not(.export-mode) .content-container {
-					order: 1 !important;
-				}
+			.mobile-top-header {
+				display: block !important;
+				background: linear-gradient(180deg, #667eea 0%, #667eea 100%);
 			}
+
+			.mobile-header-content {
+				padding: 0.75rem !important;
+			}
+
+			.mobile-header-title {
+				font-size: 1rem !important;
+				margin-bottom: 0.5rem !important;
+			}
+
+			.mobile-select-container {
+				display: block !important;
+				visibility: visible !important;
+				opacity: 1 !important;
+				z-index: 10 !important;
+			}
+
+			.mobile-select {
+				padding: 0.75rem !important;
+				font-size: 0.9rem !important;
+				min-height: 44px !important;
+				-webkit-appearance: none !important;
+				appearance: none !important;
+				margin-bottom: 2px !important;
+			}
+
+			body {
+				padding-top: 100px !important;
+			}
+
+			body:not(.export-mode) .container {
+				padding: 0.5rem !important;
+			}
+
+			body:not(.export-mode) .container .grid {
+				grid-template-columns: 1fr !important;
+				gap: 0.75rem !important;
+			}
+
+			body:not(.export-mode) .container .grid>div:first-child {
+				display: none !important;
+			}
+
+			body:not(.export-mode) .content-container {
+				order: 1 !important;
+				margin-bottom: 2px !important;
+			}
+		}
 	</style>
 </head>
 
@@ -816,7 +819,9 @@
 					reject(new Error('Không thể tải trang'));
 				};
 			});
-		}		// Xử lý nút "Tải trang hiện tại"
+		}
+
+		// Xử lý nút "Tải trang hiện tại"
 		document.getElementById('download-current').addEventListener('click', async () => {
 			const config = pageConfigs[currentPageUrl];
 			if (!config) return alert('Không thể tải trang này');
