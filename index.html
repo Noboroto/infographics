@@ -202,14 +202,11 @@
 		/* Mobile top header */
 		.mobile-top-header {
 			display: none;
-			position: fixed;
-			top: 0;
-			left: 0;
-			right: 0;
-			z-index: 1000;
-			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-			backdrop-filter: blur(10px);
-			box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+			position: relative;
+			background: transparent;
+			backdrop-filter: none;
+			box-shadow: none;
+			margin-bottom: 1rem;
 		}
 
 		.mobile-header-content {
@@ -220,10 +217,35 @@
 		.mobile-header-title {
 			font-size: 1.125rem;
 			font-weight: 700;
-			color: #ffffff;
+			color: #1e293b;
 			text-align: center;
 			margin-bottom: 0.75rem;
-			text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+			text-shadow: none;
+		}
+
+		/* Mobile download buttons */
+		.mobile-download-buttons {
+			display: flex;
+			gap: 0.5rem;
+			justify-content: center;
+			margin-top: 1rem;
+		}
+
+		.mobile-download-buttons .download-btn {
+			flex: 1;
+			max-width: 150px;
+			font-size: 0.875rem;
+			padding: 0.5rem 0.75rem;
+			background: linear-gradient(135deg, #1e40af 0%, #3730a3 100%) !important;
+			border: 2px solid #ffffff !important;
+			color: #ffffff !important;
+			box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -1px rgb(0 0 0 / 0.06) !important;
+		}
+
+		.mobile-download-buttons .download-btn:hover {
+			background: linear-gradient(135deg, #1d4ed8 0%, #4338ca 100%) !important;
+			transform: translateY(-1px);
+			box-shadow: 0 6px 10px -2px rgb(0 0 0 / 0.15) !important;
 		}
 
 		/* Fix border radius for desktop title */
@@ -233,6 +255,15 @@
 			border-radius: 1rem !important;
 			/* Fix: ensure all 4 corners are rounded */
 			box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 10px 10px -5px rgb(0 0 0 / 0.04);
+		}
+
+		/* Main app container must always be visible */
+		#main-app-container {
+			min-height: calc(100vh - 2rem);
+			z-index: 1;
+			position: relative;
+			padding-bottom: 2px !important;
+			margin-bottom: 2px !important;
 		}
 
 		/* Specific fix for iPhone SE and small mobile devices */
@@ -423,9 +454,9 @@
 				display: block !important;
 			}
 
+			/* Remove fixed header padding */
 			body {
-				padding-top: 120px !important;
-				/* Space for fixed header */
+				padding-top: 0 !important;
 			}
 
 			body:not(.export-mode) .container .grid {
@@ -441,6 +472,11 @@
 
 			body:not(.export-mode) .content-container {
 				order: 1 !important;
+			}
+
+			/* Hide desktop download buttons on mobile */
+			#download-buttons-container {
+				display: none !important;
 			}
 		}
 
@@ -463,20 +499,9 @@
 				font-size: 1.5rem !important;
 			}
 
-			body:not(.export-mode) .download-buttons {
-				top: 8px !important;
-				right: 8px !important;
-				gap: 6px !important;
-			}
-
-			body:not(.export-mode) .download-btn {
-				padding: 0.5rem 0.75rem !important;
-				font-size: 0.875rem !important;
-			}
-
-			/* Show text labels on mobile - remove the display: none rule */
-			body:not(.export-mode) .download-btn span {
-				display: inline !important;
+			/* Hide desktop download buttons */
+			#download-buttons-container {
+				display: none !important;
 			}
 
 			/* Mobile top header layout */
@@ -488,8 +513,9 @@
 				display: block !important;
 			}
 
+			/* Remove fixed header padding */
 			body {
-				padding-top: 120px !important;
+				padding-top: 0 !important;
 			}
 
 			body:not(.export-mode) .container .grid {
@@ -505,11 +531,12 @@
 		@media (max-width: 480px) {
 			body {
 				background: linear-gradient(180deg, #667eea 0%, #667eea 100px, #764ba2 100%);
+				padding-top: 0 !important;
 			}
 
 			.mobile-top-header {
 				display: block !important;
-				background: linear-gradient(180deg, #667eea 0%, #667eea 100%);
+				background: transparent;
 			}
 
 			.mobile-header-content {
@@ -519,6 +546,7 @@
 			.mobile-header-title {
 				font-size: 1rem !important;
 				margin-bottom: 0.5rem !important;
+				color: #1e293b !important;
 			}
 
 			.mobile-select-container {
@@ -537,8 +565,9 @@
 				margin-bottom: 2px !important;
 			}
 
-			body {
-				padding-top: 100px !important;
+			/* Hide desktop download buttons */
+			#download-buttons-container {
+				display: none !important;
 			}
 
 			body:not(.export-mode) .container {
@@ -590,40 +619,44 @@
 		</div>
 	</div>
 
-	<!-- Mobile Navigation Header -->
-	<div id="mobile-nav-header" class="mobile-top-header">
-		<div id="mobile-header-content" class="mobile-header-content">
-			<h2 id="mobile-nav-title" class="mobile-header-title">
-				<i data-lucide="navigation" class="inline w-5 h-5 mr-2"></i>
-				<span>Danh sách chuyên ngành</span>
-			</h2>
-			<div id="mobile-dropdown-container" class="mobile-select-container">
-				<select id="mobile-specialty-select" class="mobile-select">
-					<option value="faculty.html" selected>Thông tin chung - Khoa CNTT</option>
-					<option value="pages/computer_science.html">Khoa học Máy tính - KHMT</option>
-					<option value="pages/artificial_intelligence.html">Trí tuệ Nhân tạo - TTNT</option>
-					<option value="pages/computer_vision.html">Thị Giác Máy Tính & Điều Khiển Học Thông Minh</option>
-					<option value="pages/knowledge_engineer.html">Công nghệ Tri thức - CNTThuc</option>
-					<option value="pages/data_science.html">Khoa học Dữ liệu - KHDL</option>
-					<option value="pages/software_engineer.html">Kỹ thuật Phần mềm - KTPM</option>
-					<option value="pages/computer_network.html">Mạng máy tính & Viễn thông - MMT</option>
-					<option value="pages/information_system.html">Hệ thống Thông tin - HTTT</option>
-				</select>
+	<!-- Main Application Container -->
+	<div id="main-app-container" class="container mx-auto p-2 md:p-4 lg:p-8 pb-2">
+		<!-- Mobile Navigation Header -->
+		<div id="mobile-nav-header" class="mobile-top-header">
+			<div id="mobile-header-content" class="mobile-header-content">
+				<div id="mobile-dropdown-container" class="mobile-select-container">
+					<select id="mobile-specialty-select" class="mobile-select">
+						<option value="faculty.html" selected>Thông tin chung - Khoa CNTT</option>
+						<option value="pages/computer_science.html">Khoa học Máy tính - KHMT</option>
+						<option value="pages/artificial_intelligence.html">Trí tuệ Nhân tạo - TTNT</option>
+						<option value="pages/computer_vision.html">Thị Giác Máy Tính & Điều Khiển Học Thông Minh</option>
+						<option value="pages/knowledge_engineer.html">Công nghệ Tri thức - CNTThuc</option>
+						<option value="pages/data_science.html">Khoa học Dữ liệu - KHDL</option>
+						<option value="pages/software_engineer.html">Kỹ thuật Phần mềm - KTPM</option>
+						<option value="pages/computer_network.html">Mạng máy tính & Viễn thông - MMT</option>
+						<option value="pages/information_system.html">Hệ thống Thông tin - HTTT</option>
+					</select>
+				</div>
+
+				<!-- Mobile Download Buttons -->
+				<div id="mobile-download-buttons" class="mobile-download-buttons">
+					<button id="mobile-download-current-btn"
+						class="download-btn text-white font-bold py-2 px-3 rounded-full shadow-lg flex items-center gap-2 transition-all duration-300">
+						<i data-lucide="download" class="w-4 h-4"></i>
+						<span class="download-btn-text">Tải hiện tại</span>
+					</button>
+					<button id="mobile-download-all-btn"
+						class="download-btn text-white font-bold py-2 px-3 rounded-full shadow-lg flex items-center gap-2 transition-all duration-300">
+						<i data-lucide="download-cloud" class="w-4 h-4"></i>
+						<span class="download-btn-text">Tải tất cả</span>
+					</button>
+				</div>
 			</div>
 		</div>
-	</div>
-
-	<!-- Main Application Container -->
-	<div id="main-app-container" class="container mx-auto p-2 md:p-4 lg:p-8">
 		<!-- Main Layout Grid -->
 		<div id="main-layout-grid" class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-1 gap-4 md:gap-8">
 			<!-- Sidebar Column -->
 			<div id="sidebar-column" class="lg:col-span-1 md:col-span-1">
-				<h2 id="sidebar-title" class="text-xl md:text-2xl font-bold text-gray-800 mb-4 md:mb-6 text-center">
-					<i data-lucide="navigation" class="inline w-5 h-5 md:w-6 md:h-6 mr-2"></i>
-					<span>Danh sách chuyên ngành</span>
-				</h2>
-
 				<!-- Sidebar Navigation Menu -->
 				<div id="sidebar-container" class="main-container sidebar-container p-4 md:p-6 lg:sticky lg:top-4">
 					<div id="menu-items-wrapper" class="space-y-3">
@@ -873,6 +906,56 @@
 
 		// Xử lý nút "Tải tất cả"
 		document.getElementById('download-all-btn').addEventListener('click', async () => {
+			const zip = new JSZip();
+			const totalPages = Object.keys(pageConfigs).length;
+			let completedPages = 0;
+
+			showProgress('Bắt đầu tạo tất cả file PNG...', 0);
+
+			try {
+				for (const [url, config] of Object.entries(pageConfigs)) {
+					completedPages++;
+					updateProgress(`Đang xử lý: ${config.filename} (${completedPages}/${totalPages})`, (completedPages / totalPages) * 100);
+
+					const canvas = await capturePageAsCanvas(url, config);
+					const blob = await new Promise(resolve => canvas.toBlob(resolve));
+					zip.file(config.filename, blob);
+				}
+
+				updateProgress('Đang nén và chuẩn bị tải xuống...', 95);
+				const content = await zip.generateAsync({ type: 'blob' });
+				saveAs(content, 'fit-hcmus-infographics-all.zip');
+
+				updateProgress('Hoàn tất!', 100);
+				setTimeout(hideProgress, 1000);
+
+			} catch (error) {
+				console.error('Lỗi khi tạo file ZIP:', error);
+				alert('Có lỗi xảy ra khi tạo file ZIP');
+				hideProgress();
+			}
+		});
+
+		// Xử lý mobile download buttons
+		document.getElementById('mobile-download-current-btn').addEventListener('click', async () => {
+			const config = pageConfigs[currentPageUrl];
+			if (!config) return alert('Không thể tải trang này');
+
+			showProgress('Đang tạo file PNG...', 50);
+			try {
+				const canvas = await capturePageAsCanvas(currentPageUrl, config);
+				canvas.toBlob(blob => {
+					saveAs(blob, config.filename);
+					hideProgress();
+				});
+			} catch (error) {
+				console.error('Lỗi khi tạo PNG:', error);
+				alert('Có lỗi xảy ra khi tạo file PNG');
+				hideProgress();
+			}
+		});
+
+		document.getElementById('mobile-download-all-btn').addEventListener('click', async () => {
 			const zip = new JSZip();
 			const totalPages = Object.keys(pageConfigs).length;
 			let completedPages = 0;
