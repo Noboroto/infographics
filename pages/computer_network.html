@@ -409,38 +409,38 @@
 				height: 32px !important;
 			}
 		}
-	
-        /* Dynamic Export Mode Styles */
-        .export-mode {
-            print-color-adjust: exact !important;
-            -webkit-print-color-adjust: exact !important;
-            color-adjust: exact !important;
-        }
-        
-        .export-mode * {
-            visibility: visible !important;
-            opacity: 1 !important;
-        }
-        
-        .export-mode img {
-            display: block !important;
-            visibility: visible !important;
-            opacity: 1 !important;
-            max-width: 100% !important;
-            height: auto !important;
-        }
-        
-        .export-mode [data-lucide] {
-            display: inline-block !important;
-            visibility: visible !important;
-            opacity: 1 !important;
-        }
-        
-        .export-mode [data-lucide] svg {
-            display: inline !important;
-            visibility: visible !important;
-            opacity: 1 !important;
-        }
+
+		/* Dynamic Export Mode Styles */
+		.export-mode {
+			print-color-adjust: exact !important;
+			-webkit-print-color-adjust: exact !important;
+			color-adjust: exact !important;
+		}
+
+		.export-mode * {
+			visibility: visible !important;
+			opacity: 1 !important;
+		}
+
+		.export-mode img {
+			display: block !important;
+			visibility: visible !important;
+			opacity: 1 !important;
+			max-width: 100% !important;
+			height: auto !important;
+		}
+
+		.export-mode [data-lucide] {
+			display: inline-block !important;
+			visibility: visible !important;
+			opacity: 1 !important;
+		}
+
+		.export-mode [data-lucide] svg {
+			display: inline !important;
+			visibility: visible !important;
+			opacity: 1 !important;
+		}
 	</style>
 </head>
 
@@ -521,7 +521,7 @@
 					<i data-lucide="orbit" class="icon"></i>
 					MMT Giữa "Vũ Trụ" IT
 				</h2>
-				<div class="grid md:grid-cols-2 gap-8">
+				<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
 					<div class="card p-6">
 						<div class="flex items-center mb-4"><i data-lucide="code-2" class="icon mr-4"></i>
 							<h4 class="text-xl font-bold text-slate-800">vs. Kỹ thuật Phần mềm</h4>
@@ -679,133 +679,133 @@
 	</script>
 
 
-    <script>
-        // Dynamic Image Converter for Export
-        class ExportImageConverter {
-            constructor() {
-                this.imageCache = new Map();
-                this.isExportMode = false;
-            }
-            
-            async convertImageToBase64(imgElement) {
-                const src = imgElement.getAttribute('data-original-src') || imgElement.src;
-                
-                // Skip if already converted or external URL
-                if (src.startsWith('data:') || src.startsWith('http')) {
-                    return;
-                }
-                
-                // Check cache first
-                if (this.imageCache.has(src)) {
-                    imgElement.src = this.imageCache.get(src);
-                    return;
-                }
-                
-                try {
-                    // Save original src
-                    if (!imgElement.getAttribute('data-original-src')) {
-                        imgElement.setAttribute('data-original-src', src);
-                    }
-                    
-                    // Convert to absolute URL for fetch
-                    const response = await fetch(src);
-                    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-                    
-                    const blob = await response.blob();
-                    const reader = new FileReader();
-                    
-                    reader.onload = () => {
-                        const base64Data = reader.result;
-                        this.imageCache.set(src, base64Data);
-                        imgElement.src = base64Data;
-                        console.log(`✅ Converted image: ${src}`);
-                    };
-                    
-                    reader.readAsDataURL(blob);
-                } catch (error) {
-                    console.warn(`⚠️ Failed to convert image: ${src}`, error);
-                }
-            }
-            
-            async enableExportMode() {
-                if (this.isExportMode) return;
-                
-                this.isExportMode = true;
-                document.body.classList.add('export-mode');
-                
-                console.log('🔄 Converting images for export...');
-                
-                const images = document.querySelectorAll('img');
-                const conversions = Array.from(images).map(img => this.convertImageToBase64(img));
-                
-                await Promise.all(conversions);
-                console.log('✅ All images converted for export');
-                
-                // Trigger icon re-creation
-                if (typeof lucide !== 'undefined' && lucide.createIcons) {
-                    lucide.createIcons();
-                }
-            }
-            
-            disableExportMode() {
-                if (!this.isExportMode) return;
-                
-                this.isExportMode = false;
-                document.body.classList.remove('export-mode');
-                
-                // Restore original images
-                const images = document.querySelectorAll('img[data-original-src]');
-                images.forEach(img => {
-                    img.src = img.getAttribute('data-original-src');
-                });
-                
-                console.log('✅ Export mode disabled, images restored');
-            }
-        }
-        
-        // Global instance
-        window.exportConverter = new ExportImageConverter();
-        
-        // Auto-enable export mode detection
-        function detectExportMode() {
-            // Check for common export tool indicators
-            const indicators = [
-                () => window.location.search.includes('export'),
-                () => window.location.hash.includes('export'),
-                () => document.body.classList.contains('export-mode'),
-                () => window.navigator.webdriver, // Selenium
-                () => window.puppeteer, // Puppeteer
-                () => window.phantom, // PhantomJS
-                () => window.__nightmare, // Nightmare
-                () => window.callPhantom, // PhantomJS
-                () => document.documentElement.getAttribute('data-export') === 'true'
-            ];
-            
-            return indicators.some(check => {
-                try { return check(); } catch(e) { return false; }
-            });
-        }
-        
-        // Export control functions
-        window.enableExportMode = () => window.exportConverter.enableExportMode();
-        window.disableExportMode = () => window.exportConverter.disableExportMode();
-        
-        // Auto-detection on load
-        document.addEventListener('DOMContentLoaded', () => {
-            if (detectExportMode()) {
-                console.log('🎯 Export mode detected, enabling...');
-                window.exportConverter.enableExportMode();
-            }
-        });
-        
-        // Manual trigger via console or URL parameter
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get('mode') === 'export') {
-            window.addEventListener('load', () => {
-                window.exportConverter.enableExportMode();
-            });
-        }
-    </script>
+	<script>
+		// Dynamic Image Converter for Export
+		class ExportImageConverter {
+			constructor() {
+				this.imageCache = new Map();
+				this.isExportMode = false;
+			}
+
+			async convertImageToBase64(imgElement) {
+				const src = imgElement.getAttribute('data-original-src') || imgElement.src;
+
+				// Skip if already converted or external URL
+				if (src.startsWith('data:') || src.startsWith('http')) {
+					return;
+				}
+
+				// Check cache first
+				if (this.imageCache.has(src)) {
+					imgElement.src = this.imageCache.get(src);
+					return;
+				}
+
+				try {
+					// Save original src
+					if (!imgElement.getAttribute('data-original-src')) {
+						imgElement.setAttribute('data-original-src', src);
+					}
+
+					// Convert to absolute URL for fetch
+					const response = await fetch(src);
+					if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+					const blob = await response.blob();
+					const reader = new FileReader();
+
+					reader.onload = () => {
+						const base64Data = reader.result;
+						this.imageCache.set(src, base64Data);
+						imgElement.src = base64Data;
+						console.log(`✅ Converted image: ${src}`);
+					};
+
+					reader.readAsDataURL(blob);
+				} catch (error) {
+					console.warn(`⚠️ Failed to convert image: ${src}`, error);
+				}
+			}
+
+			async enableExportMode() {
+				if (this.isExportMode) return;
+
+				this.isExportMode = true;
+				document.body.classList.add('export-mode');
+
+				console.log('🔄 Converting images for export...');
+
+				const images = document.querySelectorAll('img');
+				const conversions = Array.from(images).map(img => this.convertImageToBase64(img));
+
+				await Promise.all(conversions);
+				console.log('✅ All images converted for export');
+
+				// Trigger icon re-creation
+				if (typeof lucide !== 'undefined' && lucide.createIcons) {
+					lucide.createIcons();
+				}
+			}
+
+			disableExportMode() {
+				if (!this.isExportMode) return;
+
+				this.isExportMode = false;
+				document.body.classList.remove('export-mode');
+
+				// Restore original images
+				const images = document.querySelectorAll('img[data-original-src]');
+				images.forEach(img => {
+					img.src = img.getAttribute('data-original-src');
+				});
+
+				console.log('✅ Export mode disabled, images restored');
+			}
+		}
+
+		// Global instance
+		window.exportConverter = new ExportImageConverter();
+
+		// Auto-enable export mode detection
+		function detectExportMode() {
+			// Check for common export tool indicators
+			const indicators = [
+				() => window.location.search.includes('export'),
+				() => window.location.hash.includes('export'),
+				() => document.body.classList.contains('export-mode'),
+				() => window.navigator.webdriver, // Selenium
+				() => window.puppeteer, // Puppeteer
+				() => window.phantom, // PhantomJS
+				() => window.__nightmare, // Nightmare
+				() => window.callPhantom, // PhantomJS
+				() => document.documentElement.getAttribute('data-export') === 'true'
+			];
+
+			return indicators.some(check => {
+				try { return check(); } catch (e) { return false; }
+			});
+		}
+
+		// Export control functions
+		window.enableExportMode = () => window.exportConverter.enableExportMode();
+		window.disableExportMode = () => window.exportConverter.disableExportMode();
+
+		// Auto-detection on load
+		document.addEventListener('DOMContentLoaded', () => {
+			if (detectExportMode()) {
+				console.log('🎯 Export mode detected, enabling...');
+				window.exportConverter.enableExportMode();
+			}
+		});
+
+		// Manual trigger via console or URL parameter
+		const urlParams = new URLSearchParams(window.location.search);
+		if (urlParams.get('mode') === 'export') {
+			window.addEventListener('load', () => {
+				window.exportConverter.enableExportMode();
+			});
+		}
+	</script>
 </body>
 
 </html>
