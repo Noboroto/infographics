@@ -562,39 +562,42 @@
 	</style>
 </head>
 
-<body class="antialiased">
-	<div class="download-buttons">
-		<button id="download-current"
+<body class="antialiased" id="main-body">
+	<!-- Download Buttons Fixed Container -->
+	<div id="download-buttons-container" class="download-buttons">
+		<button id="download-current-btn"
 			class="download-btn text-white font-bold py-3 px-4 rounded-full shadow-lg flex items-center gap-2 transition-all duration-300">
 			<i data-lucide="download" class="w-5 h-5"></i>
-			<span>Tải trang hiện tại</span>
+			<span class="download-btn-text">Tải trang hiện tại</span>
 		</button>
-		<button id="download-all"
+		<button id="download-all-btn"
 			class="download-btn text-white font-bold py-3 px-4 rounded-full shadow-lg flex items-center gap-2 transition-all duration-300">
 			<i data-lucide="download-cloud" class="w-5 h-5"></i>
-			<span>Tải tất cả PNG</span>
+			<span class="download-btn-text">Tải tất cả PNG</span>
 		</button>
 	</div>
 
+	<!-- Progress Modal Overlay -->
 	<div id="progress-modal" class="progress-container">
-		<div class="text-center">
-			<div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-			<h3 class="text-lg font-semibold mb-2">Đang tạo file PNG...</h3>
+		<div id="progress-modal-content" class="text-center">
+			<div id="progress-spinner" class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4">
+			</div>
+			<h3 id="progress-modal-title" class="text-lg font-semibold mb-2">Đang tạo file PNG...</h3>
 			<p id="progress-text" class="text-gray-600 mb-4">Chuẩn bị tải...</p>
-			<div class="w-full bg-gray-200 rounded-full h-2">
+			<div id="progress-bar-container" class="w-full bg-gray-200 rounded-full h-2">
 				<div id="progress-bar" class="bg-blue-600 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
 			</div>
 		</div>
 	</div>
 
-	<!-- Mobile top header with combo box -->
-	<div class="mobile-top-header">
-		<div class="mobile-header-content">
-			<h2 class="mobile-header-title">
+	<!-- Mobile Navigation Header -->
+	<div id="mobile-nav-header" class="mobile-top-header">
+		<div id="mobile-header-content" class="mobile-header-content">
+			<h2 id="mobile-nav-title" class="mobile-header-title">
 				<i data-lucide="navigation" class="inline w-5 h-5 mr-2"></i>
 				<span>Danh sách chuyên ngành</span>
 			</h2>
-			<div class="mobile-select-container">
+			<div id="mobile-dropdown-container" class="mobile-select-container">
 				<select id="mobile-specialty-select" class="mobile-select">
 					<option value="faculty.html" selected>Thông tin chung - Khoa CNTT</option>
 					<option value="pages/computer_science.html">Khoa học Máy tính - KHMT</option>
@@ -610,17 +613,23 @@
 		</div>
 	</div>
 
-	<div class="container mx-auto p-2 md:p-4 lg:p-8">
-		<div class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-1 gap-4 md:gap-8">
-			<div class="lg:col-span-1 md:col-span-1">
-				<h2 class="text-xl md:text-2xl font-bold text-gray-800 mb-4 md:mb-6 text-center">
+	<!-- Main Application Container -->
+	<div id="main-app-container" class="container mx-auto p-2 md:p-4 lg:p-8">
+		<!-- Main Layout Grid -->
+		<div id="main-layout-grid" class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-1 gap-4 md:gap-8">
+			<!-- Sidebar Column -->
+			<div id="sidebar-column" class="lg:col-span-1 md:col-span-1">
+				<h2 id="sidebar-title" class="text-xl md:text-2xl font-bold text-gray-800 mb-4 md:mb-6 text-center">
 					<i data-lucide="navigation" class="inline w-5 h-5 md:w-6 md:h-6 mr-2"></i>
 					<span>Danh sách chuyên ngành</span>
 				</h2>
 
+				<!-- Sidebar Navigation Menu -->
 				<div id="sidebar-container" class="main-container sidebar-container p-4 md:p-6 lg:sticky lg:top-4">
-					<div class="space-y-3">
-						<div class="menu-item p-4 text-center active" onclick="loadContent('faculty.html', this)">
+					<div id="menu-items-wrapper" class="space-y-3">
+						<!-- Faculty General Information Menu Item -->
+						<div id="menu-item-faculty" class="menu-item p-4 text-center active"
+							onclick="loadContent('faculty.html', this)">
 							<i data-lucide="graduation-cap" class="w-8 h-8 mx-auto mb-2 icon-color-faculty"></i>
 							<h3 class="font-bold text-sm">Thông tin chung</h3>
 							<p class="text-xs text-gray-600">Khoa CNTT</p>
@@ -632,42 +641,58 @@
 							<p class="text-xs text-gray-600">Quy trình xét tuyển</p>
 						</div> -->
 
-						<div class="menu-item p-4 text-center" onclick="loadContent('pages/computer_science.html', this)">
+						<!-- Computer Science Menu Item -->
+						<div id="menu-item-cs" class="menu-item p-4 text-center"
+							onclick="loadContent('pages/computer_science.html', this)">
 							<i data-lucide="cpu" class="w-8 h-8 mx-auto mb-2 icon-color-cs"></i>
 							<h3 class="font-bold text-sm">Khoa học Máy tính</h3>
 							<p class="text-xs text-gray-600">KHMT - Computer Science</p>
 						</div>
-						<div class="menu-item p-4 text-center" onclick="loadContent('pages/artificial_intelligence.html', this)">
+						<!-- Artificial Intelligence Menu Item -->
+						<div id="menu-item-ai" class="menu-item p-4 text-center"
+							onclick="loadContent('pages/artificial_intelligence.html', this)">
 							<i data-lucide="brain-circuit" class="w-8 h-8 mx-auto mb-2 icon-color-ai"></i>
 							<h3 class="font-bold text-sm">Trí tuệ Nhân tạo</h3>
 							<p class="text-xs text-gray-600">TTNT - Artificial Intelligence</p>
 						</div>
-						<div class="menu-item p-4 text-center" onclick="loadContent('pages/computer_vision.html', this)">
+						<!-- Computer Vision Menu Item -->
+						<div id="menu-item-cv" class="menu-item p-4 text-center"
+							onclick="loadContent('pages/computer_vision.html', this)">
 							<i data-lucide="camera" class="w-8 h-8 mx-auto mb-2 icon-color-cv"></i>
 							<h3 class="font-bold text-sm">Thị Giác Máy Tính & Điều Khiển Học Thông Minh</h3>
 							<p class="text-xs text-gray-600">Computer Vision & Cognitive Cybernetics</p>
 						</div>
-						<div class="menu-item p-4 text-center" onclick="loadContent('pages/knowledge_engineer.html', this)">
+						<!-- Knowledge Engineering Menu Item -->
+						<div id="menu-item-ke" class="menu-item p-4 text-center"
+							onclick="loadContent('pages/knowledge_engineer.html', this)">
 							<i data-lucide="book-open" class="w-8 h-8 mx-auto mb-2 icon-color-ke"></i>
 							<h3 class="font-bold text-sm">Công nghệ Tri thức</h3>
 							<p class="text-xs text-gray-600">CNTThuc - Knowledge Engineering</p>
 						</div>
-						<div class="menu-item p-4 text-center" onclick="loadContent('pages/data_science.html', this)">
+						<!-- Data Science Menu Item -->
+						<div id="menu-item-ds" class="menu-item p-4 text-center"
+							onclick="loadContent('pages/data_science.html', this)">
 							<i data-lucide="bar-chart-3" class="w-8 h-8 mx-auto mb-2 icon-color-ds"></i>
 							<h3 class="font-bold text-sm">Khoa học Dữ liệu</h3>
 							<p class="text-xs text-gray-600">KHDL - Data Science</p>
 						</div>
-						<div class="menu-item p-4 text-center" onclick="loadContent('pages/software_engineer.html', this)">
+						<!-- Software Engineering Menu Item -->
+						<div id="menu-item-se" class="menu-item p-4 text-center"
+							onclick="loadContent('pages/software_engineer.html', this)">
 							<i data-lucide="code" class="w-8 h-8 mx-auto mb-2 icon-color-se"></i>
 							<h3 class="font-bold text-sm">Kỹ thuật Phần mềm</h3>
 							<p class="text-xs text-gray-600">KTPM - Software Engineering</p>
 						</div>
-						<div class="menu-item p-4 text-center" onclick="loadContent('pages/computer_network.html', this)">
+						<!-- Computer Network Menu Item -->
+						<div id="menu-item-cn" class="menu-item p-4 text-center"
+							onclick="loadContent('pages/computer_network.html', this)">
 							<i data-lucide="network" class="w-8 h-8 mx-auto mb-2 icon-color-cn"></i>
 							<h3 class="font-bold text-sm">Mạng máy tính & Viễn thông</h3>
 							<p class="text-xs text-gray-600">MMT - Computer Network</p>
 						</div>
-						<div class="menu-item p-4 text-center" onclick="loadContent('pages/information_system.html', this)">
+						<!-- Information System Menu Item -->
+						<div id="menu-item-is" class="menu-item p-4 text-center"
+							onclick="loadContent('pages/information_system.html', this)">
 							<i data-lucide="database" class="w-8 h-8 mx-auto mb-2 icon-color-is"></i>
 							<h3 class="font-bold text-sm">Hệ thống Thông tin</h3>
 							<p class="text-xs text-gray-600">HTTT - Information System</p>
@@ -676,8 +701,9 @@
 				</div>
 			</div>
 
-			<div class="lg:col-span-3 md:col-span-2">
-				<div class="content-container p-2 md:p-4">
+			<!-- Content Column -->
+			<div id="content-column" class="lg:col-span-3 md:col-span-2">
+				<div id="main-content-container" class="content-container p-2 md:p-4">
 					<iframe id="content-frame" class="content-frame w-full" src="faculty.html" frameborder="0">
 					</iframe>
 				</div>
@@ -686,10 +712,13 @@
 	</div>
 
 	<script>
+		// === INITIALIZATION === 
 		lucide.createIcons();
 
+		// === GLOBAL VARIABLES ===
 		let currentPageUrl = 'faculty.html';
 
+		// === DEBUG INFORMATION ===
 		// Debug information for mobile troubleshooting (can be removed in production)
 		if (window.innerWidth <= 480) {
 			console.log('🔍 iPhone SE Debug - Screen width:', window.innerWidth);
@@ -701,6 +730,7 @@
 			}, 500);
 		}
 
+		// === PAGE CONFIGURATION ===
 		const pageConfigs = {
 			'faculty.html': { background: '#F8FAFC', filename: 'thongtin-chung-fit-hcmus.png' },
 			'pages/artificial_intelligence.html': { background: '#EEF2FF', filename: 'infographic-ai-hcmus.png' },
@@ -713,6 +743,7 @@
 			'pages/software_engineer.html': { background: '#EFF6FF', filename: 'infographic-ktpm-hcmus.png' }
 		};
 
+		// === NAVIGATION FUNCTIONS ===
 		function loadContent(url, element) {
 			currentPageUrl = url;
 			document.getElementById('content-frame').src = url;
@@ -740,7 +771,7 @@
 			}
 		});
 
-		// --- Chức năng xuất PNG ---
+		// === PNG EXPORT FUNCTIONALITY ===
 
 		// Hàm chung để chụp ảnh màn hình một trang - đơn giản và ổn định
 		async function capturePageAsCanvas(url, config) {
@@ -822,7 +853,7 @@
 		}
 
 		// Xử lý nút "Tải trang hiện tại"
-		document.getElementById('download-current').addEventListener('click', async () => {
+		document.getElementById('download-current-btn').addEventListener('click', async () => {
 			const config = pageConfigs[currentPageUrl];
 			if (!config) return alert('Không thể tải trang này');
 
@@ -841,7 +872,7 @@
 		});
 
 		// Xử lý nút "Tải tất cả"
-		document.getElementById('download-all').addEventListener('click', async () => {
+		document.getElementById('download-all-btn').addEventListener('click', async () => {
 			const zip = new JSZip();
 			const totalPages = Object.keys(pageConfigs).length;
 			let completedPages = 0;
@@ -872,6 +903,7 @@
 			}
 		});
 
+		// === PROGRESS UI FUNCTIONS ===
 		// Các hàm quản lý giao diện tiến trình
 		function showProgress(text, progress) {
 			document.getElementById('progress-modal').style.display = 'block';
