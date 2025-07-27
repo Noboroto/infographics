@@ -26,17 +26,11 @@
 			padding-bottom: 2px;
 		}
 
-		/* Ensure seamless gradient continuation on mobile */
-		@media (max-width: 768px) {
-			body {
-				background: linear-gradient(180deg, #667eea 0%, #667eea 120px, #764ba2 100%);
-			}
-		}
-
 		.main-container {
 			background-color: rgba(255, 255, 255, 0.95);
 			backdrop-filter: blur(10px);
-			border-radius: 1rem;
+			border-radius: 1rem !important;
+			/* Fix: ensure all 4 corners are rounded */
 			box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 10px 10px -5px rgb(0 0 0 / 0.04);
 			height: calc(100vh - 3rem);
 			max-height: calc(100vh - 3rem);
@@ -144,22 +138,6 @@
 			gap: 1rem;
 		}
 
-		@media (max-width: 1024px) {
-			.download-buttons {
-				top: 10px;
-				right: 10px;
-				gap: 8px;
-			}
-		}
-
-		/* Adjust download buttons for mobile header */
-		@media (max-width: 768px) {
-			.download-buttons {
-				top: 130px !important;
-				right: 10px !important;
-			}
-		}
-
 		.icon-color-ai {
 			color: #4f46e5;
 		}
@@ -241,15 +219,6 @@
 			box-shadow: 0 6px 10px -2px rgb(0 0 0 / 0.15) !important;
 		}
 
-		/* Fix border radius for desktop title */
-		.main-container {
-			background-color: rgba(255, 255, 255, 0.95);
-			backdrop-filter: blur(10px);
-			border-radius: 1rem !important;
-			/* Fix: ensure all 4 corners are rounded */
-			box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 10px 10px -5px rgb(0 0 0 / 0.04);
-		}
-
 		/* Main app container must always be visible */
 		#main-app-container {
 			max-height: 98vh;
@@ -257,16 +226,6 @@
 			z-index: 1;
 			position: relative;
 			padding-bottom: 2px !important;
-		}
-
-		/* Specific fix for iPhone SE and small mobile devices */
-		@media (max-width: 480px) {
-			.mobile-select-container {
-				display: block !important;
-				visibility: visible !important;
-				opacity: 1 !important;
-				z-index: 10 !important;
-			}
 		}
 
 		.mobile-select {
@@ -406,28 +365,72 @@
 
 		/* Responsive adjustments for mobile */
 		@media (max-width: 768px) {
+			body {
+				background: linear-gradient(180deg, #667eea 0%, #667eea 120px, #764ba2 100%);
+				padding-top: 0 !important;
+			}
+
+			.download-buttons {
+				top: 130px !important;
+				right: 10px !important;
+			}
+
+			.mobile-top-header {
+				display: block !important;
+			}
+
+			.mobile-select-container {
+				display: block !important;
+			}
+
 			body:not(.export-mode) .main-container {
 				padding: 1rem !important;
 				margin-bottom: 2px !important;
-				height: calc(100vh - 3rem) !important;
-				max-height: calc(100vh - 3rem) !important;
+				max-height: calc(100vh - 8rem) !important;
 			}
 
 			body:not(.export-mode) .content-container {
 				padding: 1rem !important;
 				margin-bottom: 2px !important;
-				height: calc(100vh - 3rem) !important;
-				max-height: calc(100vh - 3rem) !important;
+				max-height: calc(100vh - 8rem) !important;
+				order: 1 !important;
+				overflow-y: auto !important;
 			}
 
 			.content-frame {
-				height: calc(100vh - 3rem) !important;
-				max-height: calc(100vh - 3rem) !important;
+				max-height: calc(100vh - 8rem) !important;
+			}
+
+			body:not(.export-mode) .container .grid {
+				grid-template-columns: 1fr !important;
+				gap: 1rem !important;
+			}
+
+			body:not(.export-mode) .container .grid>div:first-child {
+				order: 1 !important;
+				display: none !important;
+				/* Hide desktop sidebar area */
+			}
+
+			/* Hide desktop download buttons on mobile */
+			#download-buttons-container {
+				display: none !important;
+			}
+
+			#main-app-container {
+				padding-top: 2rem !important;
+				max-height: 98vh !important;
 			}
 		}
 
 		/* Enhanced responsive design */
 		@media (max-width: 1024px) {
+			.download-buttons {
+				top: 10px;
+				right: 10px;
+				gap: 8px;
+			}
+
 			body:not(.export-mode) .container {
 				padding: 1rem !important;
 			}
@@ -443,42 +446,6 @@
 
 			body:not(.export-mode) .header-section h1 {
 				font-size: 2rem !important;
-			}
-		}
-
-		/* Tablet layout improvements */
-		@media (max-width: 768px) {
-			.mobile-top-header {
-				display: block !important;
-			}
-
-			.mobile-select-container {
-				display: block !important;
-			}
-
-			/* Remove fixed header padding */
-			body {
-				padding-top: 0 !important;
-			}
-
-			body:not(.export-mode) .container .grid {
-				grid-template-columns: 1fr !important;
-				gap: 1rem !important;
-			}
-
-			body:not(.export-mode) .container .grid>div:first-child {
-				order: 1 !important;
-				display: none !important;
-				/* Hide desktop sidebar area */
-			}
-
-			body:not(.export-mode) .content-container {
-				order: 1 !important;
-			}
-
-			/* Hide desktop download buttons on mobile */
-			#download-buttons-container {
-				display: none !important;
 			}
 		}
 
@@ -501,31 +468,16 @@
 				font-size: 1.5rem !important;
 			}
 
-			/* Hide desktop download buttons */
-			#download-buttons-container {
-				display: none !important;
-			}
-
-			/* Mobile top header layout */
-			.mobile-top-header {
-				display: block !important;
-			}
-
-			.mobile-select-container {
-				display: block !important;
-			}
-
-			/* Remove fixed header padding */
-			body {
-				padding-top: 0 !important;
-			}
-
 			body:not(.export-mode) .container .grid {
 				grid-template-columns: 1fr !important;
 			}
 
 			body:not(.export-mode) .container .grid>div:first-child {
 				display: none !important;
+			}
+
+			body:not(.export-mode) .content-container {
+				overflow-y: auto !important;
 			}
 		}
 
@@ -561,11 +513,6 @@
 				margin-bottom: 2px !important;
 			}
 
-			/* Hide desktop download buttons */
-			#download-buttons-container {
-				display: none !important;
-			}
-
 			body:not(.export-mode) .container {
 				padding: 0.5rem !important;
 			}
@@ -581,14 +528,16 @@
 
 			body:not(.export-mode) .content-container {
 				order: 1 !important;
-				margin-bottom: 2px !important;
-				height: calc(100vh - 3rem) !important;
-				max-height: calc(100vh - 3rem) !important;
+				max-height: calc(100vh - 10rem) !important;
 			}
 
 			.content-frame {
-				height: calc(100vh - 3rem) !important;
-				max-height: calc(100vh - 3rem) !important;
+				max-height: calc(100vh - 10rem) !important;
+			}
+
+			#main-app-container {
+				padding-top: 1rem !important;
+				max-height: 98vh !important;
 			}
 		}
 	</style>
