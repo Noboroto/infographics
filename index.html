@@ -25,6 +25,18 @@
 			overflow: hidden;
 		}
 
+		/* Ensure seamless gradient continuation on mobile */
+		@media (max-width: 768px) {
+			body {
+				background: linear-gradient(180deg, #667eea 0%, #667eea 120px, #764ba2 100%);
+			}
+
+			/* Synchronize mobile header gradient with body background */
+			.mobile-top-header {
+				background: linear-gradient(180deg, #667eea 0%, #667eea 100%);
+			}
+		}
+
 		.main-container {
 			background-color: rgba(255, 255, 255, 0.95);
 			backdrop-filter: blur(10px);
@@ -192,7 +204,7 @@
 			left: 0;
 			right: 0;
 			z-index: 1000;
-			background: linear-gradient(135deg, rgba(102, 126, 234, 0.95) 0%, rgba(118, 75, 162, 0.95) 100%);
+			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 			backdrop-filter: blur(10px);
 			box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
 		}
@@ -481,62 +493,69 @@
 				display: none !important;
 			}
 
-			body:not(.export-mode) .content-container {
-				order: 1 !important;
-			}
-		}
+			/* iPhone SE and small mobile devices specific fixes */
+			@media (max-width: 480px) {
+				body {
+					background: linear-gradient(180deg, #667eea 0%, #667eea 100px, #764ba2 100%);
+				}
 
-		/* iPhone SE and small mobile devices specific fixes */
-		@media (max-width: 480px) {
-			.mobile-top-header {
-				display: block !important;
-			}
-
-			.mobile-header-content {
-				padding: 0.75rem !important;
+				.mobile-top-header {
+					display: block !important;
+					background: linear-gradient(180deg, #667eea 0%, #667eea 100%);
+				}
 			}
 
-			.mobile-header-title {
-				font-size: 1rem !important;
-				margin-bottom: 0.5rem !important;
-			}
+			/* iPhone SE and small mobile devices specific fixes */
+			@media (max-width: 480px) {
+				.mobile-top-header {
+					display: block !important;
+				}
 
-			.mobile-select-container {
-				display: block !important;
-				visibility: visible !important;
-				opacity: 1 !important;
-				z-index: 10 !important;
-			}
+				.mobile-header-content {
+					padding: 0.75rem !important;
+				}
 
-			.mobile-select {
-				padding: 0.75rem !important;
-				font-size: 0.9rem !important;
-				min-height: 44px !important;
-				-webkit-appearance: none !important;
-				appearance: none !important;
-			}
+				.mobile-header-title {
+					font-size: 1rem !important;
+					margin-bottom: 0.5rem !important;
+				}
 
-			body {
-				padding-top: 100px !important;
-			}
+				.mobile-select-container {
+					display: block !important;
+					visibility: visible !important;
+					opacity: 1 !important;
+					z-index: 10 !important;
+				}
 
-			body:not(.export-mode) .container {
-				padding: 0.5rem !important;
-			}
+				.mobile-select {
+					padding: 0.75rem !important;
+					font-size: 0.9rem !important;
+					min-height: 44px !important;
+					-webkit-appearance: none !important;
+					appearance: none !important;
+				}
 
-			body:not(.export-mode) .container .grid {
-				grid-template-columns: 1fr !important;
-				gap: 0.75rem !important;
-			}
+				body {
+					padding-top: 100px !important;
+				}
 
-			body:not(.export-mode) .container .grid>div:first-child {
-				display: none !important;
-			}
+				body:not(.export-mode) .container {
+					padding: 0.5rem !important;
+				}
 
-			body:not(.export-mode) .content-container {
-				order: 1 !important;
+				body:not(.export-mode) .container .grid {
+					grid-template-columns: 1fr !important;
+					gap: 0.75rem !important;
+				}
+
+				body:not(.export-mode) .container .grid>div:first-child {
+					display: none !important;
+				}
+
+				body:not(.export-mode) .content-container {
+					order: 1 !important;
+				}
 			}
-		}
 	</style>
 </head>
 
