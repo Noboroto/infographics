@@ -1,0 +1,20 @@
+# Coolify-native variant of compose.yml.
+#
+# No `networks:` block: the old external `multi-domain` network existed only so the
+# reverse proxy could reach this container by name. Traefik routes by label now.
+# `container_name` is dropped because Coolify overrides it regardless.
+#
+# The web root is the repository itself. That still works under Coolify: it clones
+# the repo into its own working directory and `.` resolves there, so the site content
+# comes from git exactly as before.
+services:
+  web:
+    image: nginx:alpine
+    expose:
+      - "80"
+    volumes:
+      - .:/usr/share/nginx/html:ro
+    environment:
+      - NGINX_HOST=localhost
+      - NGINX_PORT=80
+    restart: unless-stopped
