@@ -10,6 +10,7 @@
 services:
   web:
     image: nginx:alpine
+    cpus: 2
     expose:
       - "80"
     volumes:
